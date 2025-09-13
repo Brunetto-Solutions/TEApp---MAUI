@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TEApp.Views.TriageScreen.TriageScreen"
+             BackgroundColor="#FDF9EC">
+    <Grid RowDefinitions="Auto, *" Padding="20,60,20,20">
+
+        <!-- Background-Image -->
+        <!--<Image Source="logo.png"
+           Aspect="AspectFill"
+           Opacity="1"  
+           Scale="0.6"
+        Grid.RowSpan="2"/>-->
+
+        <!-- Header -->
+        <VerticalStackLayout Grid.Row="0"
+                     Spacing="8"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Start">
+
+            <Label HorizontalOptions="Center"
+           HorizontalTextAlignment="Center"
+           FontFamily="Jaro"
+           FontSize="22"
+           TextColor="Black">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Quociente de Espectro do Autismo (QA)" FontAttributes="Bold" FontSize="24" TextColor="#000000"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Label Text="Essa escala foi desenvolvida para a detecção de quadros sutis de autismo em adultos"
+           HorizontalOptions="Center"
+           HorizontalTextAlignment="Center"
+           FontFamily="Jaro"
+           FontSize="16"
+           TextColor="#1E4D6B"/>
+        </VerticalStackLayout>
+
+        <!-- Centered Buttons -->
+        <VerticalStackLayout Grid.Row="1"
+                     Spacing="20"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Center"
+                     >
+
+            <Button Text="Começar"
+            BackgroundColor="#1E4D6B"
+            TextColor="White"
+            FontFamily="Jaro"
+            FontSize="16"
+            FontAttributes="Bold"
+            CornerRadius="100"
+            WidthRequest="300"
+            HeightRequest="50"
+            >
+                <Button.Shadow>
+                    <Shadow Brush="Black" 
+                    Opacity="0.5" 
+                    Offset="0,5"  
+                    Radius="10"/>
+                </Button.Shadow>
+            </Button>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

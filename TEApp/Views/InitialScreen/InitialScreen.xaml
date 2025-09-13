@@ -1,0 +1,86 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TEApp.Views.InitialScreen.InitialScreen"
+             BackgroundColor="#FDF9EC">
+
+    <Grid RowDefinitions="Auto, *" Padding="20,60,20,20">
+
+        <!-- Background-Image -->
+        <!--<Image Source="logo.png"
+               Aspect="AspectFill"
+               Opacity="0.5"  
+               Scale="0.9"
+            Grid.RowSpan="2"/>-->
+
+        <!-- Header -->
+            <VerticalStackLayout Grid.Row="0"
+                             Spacing="8"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Start">
+
+                <Label HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   FontFamily="Jaro"
+                   FontSize="22"
+                   TextColor="Black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                        <Span Text="Olá, seja bem-vindo(a)!" FontAttributes="Bold" FontSize="24" TextColor="#000000"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Text="Estamos aqui para te apoiar na identificação e no cuidado com o TEA."
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   FontFamily="Jaro"
+                   FontSize="16"
+                   TextColor="#1E4D6B"/>
+            </VerticalStackLayout>
+
+            <!-- Centered Buttons -->
+            <VerticalStackLayout Grid.Row="1"
+                             Spacing="20"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center">
+
+            <Button Text="Quero fazer a triagem"
+                    BackgroundColor="#2A5C5E"
+                    TextColor="#FFFFFF"
+                    FontFamily="Jaro"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    CornerRadius="100"
+                    WidthRequest="300"
+                    HeightRequest="50"
+                    Clicked="OnTriageClicked"
+                    >
+                <Button.Shadow>
+                    <Shadow Brush="Black" 
+                            Opacity="0.5" 
+                            Offset="0,5"  
+                            Radius="10"/>
+                </Button.Shadow>
+            </Button>
+
+            <Button Text="Já tenho diagnóstico"
+                    BackgroundColor="#FFFFFF"
+                    TextColor="Black"
+                    FontFamily="Jaro"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    CornerRadius="100"
+                    WidthRequest="300"
+                    HeightRequest="50"
+                    Clicked="onDiagnosticClicked"
+                    >
+                <Button.Shadow>
+                    <Shadow Brush="Black" 
+                            Opacity="0.5" 
+                            Offset="0,5"  
+                            Radius="10"/>
+                </Button.Shadow>
+            </Button>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
