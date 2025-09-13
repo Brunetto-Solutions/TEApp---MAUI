@@ -39,9 +39,9 @@
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.png" />
-
+		
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash_screen.png" Aspect="AspectFill" />
+		<MauiSplashScreen Include="Resources\Splash\splash_screen.svg" Resize="true" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />

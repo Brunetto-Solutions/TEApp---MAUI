@@ -1,9 +1,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TEApp.Views.InitialScreen.InitialScreen"
-             BackgroundColor="#FDF9EC">
+             BackgroundColor="#FFFFFF">
 
-    <Grid RowDefinitions="Auto, *" Padding="20,60,20,20">
+    <Grid RowDefinitions="2*,Auto,Auto" Padding="20,60,20,20">
 
         <!-- Background-Image -->
         <!--<Image Source="logo.png"
@@ -22,7 +22,7 @@
                    HorizontalTextAlignment="Center"
                    FontFamily="Jaro"
                    FontSize="22"
-                   TextColor="Black">
+                   TextColor="#1E4D6B">
                     <Label.FormattedText>
                         <FormattedString>
                         <Span Text="Olá, seja bem-vindo(a)!" FontAttributes="Bold" FontSize="24" TextColor="#000000"/>
@@ -46,7 +46,7 @@
 
             <Button Text="Quero fazer a triagem"
                     BackgroundColor="#2A5C5E"
-                    TextColor="#FFFFFF"
+                    TextColor="#000000"
                     FontFamily="Jaro"
                     FontSize="16"
                     FontAttributes="Bold"
@@ -65,7 +65,7 @@
 
             <Button Text="Já tenho diagnóstico"
                     BackgroundColor="#FFFFFF"
-                    TextColor="Black"
+                    TextColor="#000000"
                     FontFamily="Jaro"
                     FontSize="16"
                     FontAttributes="Bold"
@@ -82,5 +82,13 @@
                 </Button.Shadow>
             </Button>
         </VerticalStackLayout>
+        <Image Grid.Row="2"
+            Source="logo.png"
+            WidthRequest="300"
+            HeightRequest="300"
+            HorizontalOptions="Center"
+            Opacity="0.2"
+            Scale="1.5"
+            Margin="0,0,0,0"/>
     </Grid>
 </ContentPage>

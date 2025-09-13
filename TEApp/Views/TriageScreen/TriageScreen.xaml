@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TEApp.Views.TriageScreen.TriageScreen"
-             BackgroundColor="#FDF9EC">
-    <Grid RowDefinitions="Auto, *" Padding="20,60,20,20">
+             BackgroundColor="#FFFFFF">
+    <Grid RowDefinitions="2*,Auto, *" Padding="20,60,20,20">
 
         <!-- Background-Image -->
         <!--<Image Source="logo.png"
@@ -18,11 +18,23 @@
                      HorizontalOptions="Center"
                      VerticalOptions="Start">
 
+            <VerticalStackLayout Grid.Row="0">
+                <Image Grid.Row="0"
+                   WidthRequest="300"
+                   HeightRequest="300"
+                   HorizontalOptions="Center"
+                   Opacity="0.2"
+                   Scale="1.5"
+                   Margin="0,-80,0,0"
+                   Source="logo.png"/>
+            </VerticalStackLayout>
+            
+
             <Label HorizontalOptions="Center"
-           HorizontalTextAlignment="Center"
-           FontFamily="Jaro"
-           FontSize="22"
-           TextColor="Black">
+               HorizontalTextAlignment="Center"
+               FontFamily="Jaro"
+               FontSize="22"
+               TextColor="Black">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="Quociente de Espectro do Autismo (QA)" FontAttributes="Bold" FontSize="24" TextColor="#000000"/>
@@ -36,16 +48,29 @@
            FontFamily="Jaro"
            FontSize="16"
            TextColor="#1E4D6B"/>
+            
+            
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="2">
+            <Label
+                Text="Leva cerca de 5-10 minutos para ser concluído"
+                TextColor="#000000"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                FontFamily="Jaro"
+                FontSize="16"/>
         </VerticalStackLayout>
 
         <!-- Centered Buttons -->
-        <VerticalStackLayout Grid.Row="1"
+        <VerticalStackLayout Grid.Row="2"
                      Spacing="20"
                      HorizontalOptions="Center"
                      VerticalOptions="Center"
                      >
 
-            <Button Text="Começar"
+            <Button 
+                Text="Começar"
             BackgroundColor="#1E4D6B"
             TextColor="White"
             FontFamily="Jaro"
