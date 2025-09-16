@@ -71,7 +71,7 @@
 
             <Button 
                 Text="Começar"
-            BackgroundColor="#1E4D6B"
+            BackgroundColor="#2A5C5E"
             TextColor="White"
             FontFamily="Jaro"
             FontSize="16"

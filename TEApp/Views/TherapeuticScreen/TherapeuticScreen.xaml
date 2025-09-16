@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TEApp.Views.TherapeuticScreen.TherapeuticScreen"
-             BackgroundColor="#FDF9EC"
+             BackgroundColor="#FFFFFF"
              >
 
     <Grid RowDefinitions="Auto, *" Padding="20,60,20,20">
