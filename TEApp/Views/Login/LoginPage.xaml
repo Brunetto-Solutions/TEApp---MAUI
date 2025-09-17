@@ -2,11 +2,56 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TEApp.Views.Login.LoginPage"
-             BackgroundColor="#FDF9EC">
+             BackgroundImageSource="background_screen.png">
   <!-- Conteúdo aqui -->
+    <Grid RowDefinitions="2*, auto, auto">
+        <VerticalStackLayout Grid.Row="0" Padding="20">
+            <Label
+                TextColor="#1E4D6B"
+                Text="Login"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                FontSize="30"
+                FontAttributes="Bold"
+                />
 
-    <VerticalStackLayout>
-        <Label
-            Text="Login"/>
-    </VerticalStackLayout>
+            <Image
+                Source="logo.png"/>
+
+            <VerticalStackLayout Grid.Row="1">
+                <Label
+                    Text="Email"
+                    Margin="60,5,0,5"/>
+                <Entry
+                    WidthRequest="250"
+                    HeightRequest="20"
+                    BackgroundColor="AliceBlue"/>
+                <Label
+                    Text="Email"
+                    Margin="60,5,0,5"/>
+                <Entry
+                    
+                    WidthRequest="250"
+                    HeightRequest="20"
+                    BackgroundColor="AliceBlue"/>
+
+                <Button
+                    Text="Entrar"
+                    TextColor="Black"
+                    WidthRequest="120"
+                    Margin="0,20,0,0"
+                    BackgroundColor="#2A5C5E"/>
+
+                <Button
+                    Text="Entrar"
+                    TextColor="Black"
+                    WidthRequest="120"
+                    Margin="0,20,0,0"
+                    BackgroundColor="#FFFFFF"
+                    BorderWidth="1"
+                    BorderColor="black"/>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
+    
 </ContentPage>
