@@ -71,14 +71,14 @@
 
             <Button 
                 Text="Começar"
-            BackgroundColor="#2A5C5E"
-            TextColor="White"
-            FontFamily="Jaro"
-            FontSize="16"
-            FontAttributes="Bold"
-            CornerRadius="100"
-            WidthRequest="300"
-            HeightRequest="50"
+                BackgroundColor="#2A5C5E"
+                TextColor="White"
+                FontFamily="Jaro"
+                FontSize="16"
+                FontAttributes="Bold"
+                CornerRadius="100"
+                WidthRequest="300"
+                HeightRequest="50"
             >
                 <Button.Shadow>
                     <Shadow Brush="Black" 
