@@ -29,8 +29,8 @@
                 <Label
                     Text="Email"
                     Margin="60,5,0,5"/>
+                
                 <Entry
-                    
                     WidthRequest="250"
                     HeightRequest="20"
                     BackgroundColor="AliceBlue"/>
