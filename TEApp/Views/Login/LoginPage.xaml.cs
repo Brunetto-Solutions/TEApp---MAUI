@@ -18,5 +18,10 @@ namespace TEApp.Views.Login
         {
             await Navigation.PushAsync(new Register.RegisterPage());
         }
+
+        private async void ForgotPasswordRedirect(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ForgotPassword.ForgotPassword());
+        }
     }
 }

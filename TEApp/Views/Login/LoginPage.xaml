@@ -67,9 +67,12 @@
                     <Label
                         Text="Esqueci Minha Senha"
                         HorizontalOptions="Center"
-                        VerticalOptions="Center"/>  
+                        VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ForgotPasswordRedirect"/>
+                        </Label.GestureRecognizers>
+                    </Label>
                 </VerticalStackLayout>
-                
             </VerticalStackLayout>
         </VerticalStackLayout>
     </Grid>
