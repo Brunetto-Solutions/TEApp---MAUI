@@ -1,3 +1,4 @@
+using TEApp.Views.Login;
 namespace TEApp.Views.Register;
 
 public partial class RegisterPage : ContentPage
@@ -9,6 +10,7 @@ public partial class RegisterPage : ContentPage
 
     private async void loginRedirect(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new Login.LoginPage());
+        var loginPage = this.Handler.MauiContext.Services.GetService<LoginPage>();
+        await Navigation.PushAsync(loginPage);
     }
 }

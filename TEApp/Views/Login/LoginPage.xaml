@@ -28,6 +28,7 @@
                     Text="Email"
                     Margin="60,5,0,5"/>
                 <Entry
+                    x:Name="emailEntry"
                     Visual="Default"
                     WidthRequest="250"
                     HeightRequest="20"
@@ -37,6 +38,8 @@
                     Margin="60,5,0,5"/>
                 
                 <Entry
+                    x:Name="passwordEntry"
+                    IsPassword="True"
                     Visual="Default"
                     WidthRequest="250"
                     HeightRequest="20"
@@ -51,7 +54,7 @@
                     BackgroundColor="#2A5C5E"
                     BorderWidth="1"
                     BorderColor="black"
-                    Clicked="loginRedirect"/>
+                    Clicked="OnLoginClicked"/>
 
                 <Button
                     Text="Cadastrar"
