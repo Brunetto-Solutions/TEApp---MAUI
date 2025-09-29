@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TEApp.Views.TriageScreen.TriageScreen"
-             BackgroundColor="#FFFFFF">
-    <Grid RowDefinitions="2*,Auto, *" Padding="20,60,20,20">
+             BackgroundColor="#FFFFFF"
+             Shell.NavBarIsVisible="False">
+    <Grid RowDefinitions="2*,Auto, *" Padding="20,80,20,20">
 
         <!-- Background-Image -->
         <!--<Image Source="logo.png"

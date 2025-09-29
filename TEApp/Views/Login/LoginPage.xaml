@@ -5,7 +5,7 @@
              BackgroundImageSource="background_screen.png">
   <!-- Conteúdo aqui -->
     <Grid RowDefinitions="2*, auto, auto">
-        <VerticalStackLayout Grid.Row="0" Padding="20">
+        <VerticalStackLayout Grid.Row="0" Padding="40">
             <VerticalStackLayout>
                 <Label
                     TextColor="#1E4D6B"
@@ -26,21 +26,26 @@
             <VerticalStackLayout Grid.Row="0">
                 <Label
                     Text="Email"
-                    Margin="60,5,0,5"/>
+                    TextColor="Black"
+                    Margin="40,0,0,5"/>
                 <Entry
                     x:Name="emailEntry"
                     Visual="Default"
+                    TextColor="Black"
                     WidthRequest="250"
                     HeightRequest="20"
                     BackgroundColor="AliceBlue"/>
+                
                 <Label
                     Text="Senha"
-                    Margin="60,5,0,5"/>
+                    TextColor="Black"
+                    Margin="40,5,0,5"/>
                 
                 <Entry
                     x:Name="passwordEntry"
                     IsPassword="True"
                     Visual="Default"
+                    TextColor="Black"
                     WidthRequest="250"
                     HeightRequest="20"
                     BackgroundColor="AliceBlue"
@@ -70,6 +75,7 @@
                     <Label
                         Text="Esqueci Minha Senha"
                         HorizontalOptions="Center"
+                        TextColor="black"
                         VerticalOptions="Center">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="ForgotPasswordRedirect"/>

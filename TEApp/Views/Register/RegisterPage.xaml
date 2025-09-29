@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TEApp.Views.Register.RegisterPage"
              BackgroundImageSource="background_screen.png"
-             NavigationPage.HasNavigationBar="False"
+             Shell.NavBarIsVisible="False"
              Title="RegisterPage">
     <!-- Conteúdo aqui -->
-    <ScrollView>
+
     <Grid RowDefinitions="2*, auto, auto">
-        <VerticalStackLayout Grid.Row="0" Padding="20">
+        <VerticalStackLayout Grid.Row="0" Padding="40">
             <VerticalStackLayout>
                 <Label
                   TextColor="#1E4D6B"
@@ -26,18 +26,22 @@
 
             </VerticalStackLayout>
 
-            <VerticalStackLayout Grid.Row="0">
+            <VerticalStackLayout Grid.Row="0" Margin="0,-50">
                 <Label
-                  Text="Email"
-                  Margin="60,5,0,5"/>
+                  Text="Nome Completo"
+                  TextColor="Black"
+                  Margin="40,5,0,5"/>
+                
                 <Entry
                   Visual="Default"
                   WidthRequest="250"
                   HeightRequest="20"
                   BackgroundColor="AliceBlue"/>
+                
                 <Label
-                  Text="Senha"
-                  Margin="60,5,0,5"/>
+                  Text="Email"
+                  TextColor="Black"
+                  Margin="40,5,0,5"/>
 
                 <Entry
                   Visual="Default"
@@ -46,16 +50,20 @@
                   BackgroundColor="AliceBlue"
                   />
                 <Label
-                  Text="Email"
-                  Margin="60,5,0,5"/>
+                  Text="Senha"
+                  Margin="40,5,0,5"
+                  TextColor="Black"/>
+
                 <Entry
                   Visual="Default"
                   WidthRequest="250"
                   HeightRequest="20"
                   BackgroundColor="AliceBlue"/>
+                
                 <Label
-                  Text="Email"
-                  Margin="60,5,0,5"/>
+                  Text="Confirme Sua Senha"
+                  TextColor="Black"
+                  Margin="40,5,0,5"/>
                 <Entry
                   Visual="Default"
                   WidthRequest="250"
@@ -84,5 +92,4 @@
             </VerticalStackLayout>
         </VerticalStackLayout>
     </Grid>
-    </ScrollView>
 </ContentPage>
