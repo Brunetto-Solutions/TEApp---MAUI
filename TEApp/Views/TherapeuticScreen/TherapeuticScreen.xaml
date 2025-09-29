@@ -5,26 +5,38 @@
              BackgroundColor="#FFFFFF"
              >
 
-    <Grid RowDefinitions="Auto, *" Padding="20,60,20,20">
+    <Grid RowDefinitions="2*,Auto, *" Padding="20,60,20,20">
 
         <!-- Background-Image -->
         <!--<Image Source="logo.png"
-           Aspect="AspectFill"
-           Opacity="1"  
-           Scale="0.6"
-        Grid.RowSpan="2"/>-->
+       Aspect="AspectFill"
+       Opacity="1"  
+       Scale="0.6"
+    Grid.RowSpan="2"/>-->
 
         <!-- Header -->
         <VerticalStackLayout Grid.Row="0"
-                         Spacing="8"
-                         HorizontalOptions="Center"
-                         VerticalOptions="Start">
+                 Spacing="8"
+                 HorizontalOptions="Center"
+                 VerticalOptions="Start">
+
+            <VerticalStackLayout Grid.Row="0">
+                <Image Grid.Row="0"
+               WidthRequest="300"
+               HeightRequest="300"
+               HorizontalOptions="Center"
+               Opacity="0.2"
+               Scale="1.5"
+               Margin="0,-80,0,0"
+               Source="logo.png"/>
+            </VerticalStackLayout>
+
 
             <Label HorizontalOptions="Center"
-               HorizontalTextAlignment="Center"
-               FontFamily="Jaro"
-               FontSize="22"
-               TextColor="Black">
+           HorizontalTextAlignment="Center"
+           FontFamily="Jaro"
+           FontSize="22"
+           TextColor="Black">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="Cadastrar Plano Terapêutico" FontAttributes="Bold" FontSize="24" TextColor="#000000"/>
@@ -32,38 +44,61 @@
                 </Label.FormattedText>
             </Label>
 
-            <Label Text="Você já possui um plano elaborado pela sua doutora. Aqui, você pode registrar as orientações para acompanhar tudo de forma organizada e prática."
-               HorizontalOptions="Center"
-               HorizontalTextAlignment="Center"
-               FontFamily="Jaro"
-               FontSize="16"
-               TextColor="#1E4D6B"/>
+            <Label Text="Você já possui um plano elaborado pela sua doutora. Aqui, você pode registrar as orientações para acompanhar tudo de forma organizada e prática"
+       HorizontalOptions="Center"
+       HorizontalTextAlignment="Center"
+       FontFamily="Jaro"
+       FontSize="16"
+       TextColor="#1E4D6B"/>
+
+
         </VerticalStackLayout>
 
-        <!-- Centered Buttons -->
-        <VerticalStackLayout Grid.Row="1"
-                         Spacing="20"
-                         HorizontalOptions="Center"
-                         VerticalOptions="Center"
-                         >
 
-            <Button Text="Cadastrar Meu Plano"
-                BackgroundColor="#FFFFFF"
-                TextColor="Black"
+        <!-- Centered Buttons -->
+        <VerticalStackLayout Grid.Row="2"
+                 Spacing="20"
+                 HorizontalOptions="Center"
+                 VerticalOptions="Center"
+                 >
+
+            <Button 
+                Text="Cadastrar Meu Plano"
+                BackgroundColor="#6C63FF"
+                TextColor="White"
                 FontFamily="Jaro"
                 FontSize="16"
                 FontAttributes="Bold"
                 CornerRadius="100"
                 WidthRequest="300"
                 HeightRequest="50"
-                >
+        >
+                <Button.Shadow>
+                    <Shadow Brush="Black" 
+                Opacity="0.5" 
+                Offset="0,5"  
+                Radius="10"/>
+                </Button.Shadow>
+            </Button>
+            <Button 
+                Text="Pular Essa Etapa"
+                BackgroundColor="#6C63FF"
+                TextColor="White"
+                FontFamily="Jaro"
+                FontSize="16"
+                FontAttributes="Bold"
+                CornerRadius="100"
+                WidthRequest="300"
+                HeightRequest="50"
+>
                 <Button.Shadow>
                     <Shadow Brush="Black" 
                         Opacity="0.5" 
                         Offset="0,5"  
-                        Radius="10"/>
+                        Radius="10"/>   
                 </Button.Shadow>
             </Button>
+
         </VerticalStackLayout>
     </Grid>
 </ContentPage>
