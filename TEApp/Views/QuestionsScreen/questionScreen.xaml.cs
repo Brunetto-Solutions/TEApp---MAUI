@@ -1,113 +1,227 @@
-using Firebase.Database;
-using Firebase.Database.Query;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TEApp.Views.QuestionsScreen;
 
 public partial class QuestionScreen : ContentPage
 {
-    private FirebaseClient firebaseClient;
     private List<Question> allQuestions;
     private List<Question> selectedQuestions;
+    private Dictionary<string, string> userAnswers = new Dictionary<string, string>();
 
     public QuestionScreen()
     {
         InitializeComponent();
-        firebaseClient = new FirebaseClient("https://teapp-120925-default-rtdb.firebaseio.com/");
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
         LoadQuestions();
     }
 
-    private async void LoadQuestions()
+    private void LoadQuestions()
     {
-        try
+        // Cria as perguntas diretamente no código
+        allQuestions = new List<Question>
         {
-            var questionsDict = await firebaseClient
-                .Child("forms")
-                .Child("aq_test")
-                .Child("questions")
-                .OnceAsync<Dictionary<string, Question>>();
-
-            allQuestions = questionsDict
-                .SelectMany(d => d.Object.Values)
-                .ToList();
-
-            if (allQuestions.Count == 0)
+            new Question
             {
-                await DisplayAlert("Aviso", "Nenhuma pergunta encontrada.", "OK");
-                return;
+                Id = "q1",
+                Text = "Prefiro fazer as coisas com os outros do que sozinho.",
+                Type = "radio",
+                Options = new Dictionary<string, string>
+                {
+                    { "1", "Definitivamente concordo" },
+                    { "2", "Concordo um pouco" },
+                    { "3", "Discordo um pouco" },
+                    { "4", "Definitivamente discordo" }
+                }
+            },
+            new Question
+            {
+                Id = "q2",
+                Text = "Prefiro fazer as coisas sempre da mesma maneira",
+                Type = "radio",
+                Options = new Dictionary<string, string>
+                {
+                    { "1", "Concordo plenamente" },
+                    { "2", "Concordo um pouco" },
+                    { "3", "Discordo um pouco" },
+                    { "4", "Discordo plenamente" }
+                }
+            },
+            new Question
+            {
+                Id = "q3",
+                Text = "Quando tento imaginar uma coisa, tenho muita facilidade em criar uma imagem na minha mente.",
+                Type = "radio",
+                Options = new Dictionary<string, string>
+                {
+                    { "1", "Concordo plenamente" },
+                    { "2", "Concordo um pouco" },
+                    { "3", "Discordo um pouco" },
+                    { "4", "Discordo plenamente" }
+                }
+            },
+            new Question
+            {
+                Id = "q4",
+                Text = "Frequentemente fico tão absorto em uma coisa que ignoro outras coisas.",
+                Type = "radio",
+                Options = new Dictionary<string, string>
+                {
+                    { "1", "Definitivamente concordo" },
+                    { "2", "Concordo um pouco" },
+                    { "3", "Discordo um pouco" },
+                    { "4", "Definitivamente discordo" }
+                }
+            },
+            new Question
+            {
+                Id = "q5",
+                Text = "Frequentemente noto pequenos sons quando outros não notam.",
+                Type = "radio",
+                Options = new Dictionary<string, string>
+                {
+                    { "1", "Definitivamente concordo" },
+                    { "2", "Concordo um pouco" },
+                    { "3", "Discordo um pouco" },
+                    { "4", "Definitivamente discordo" }
+                }
             }
+        };
 
-            // Seleciona 3 aleatórias
-            selectedQuestions = allQuestions
-                .OrderBy(x => Guid.NewGuid())
-                .Take(3)
-                .ToList();
+        // Embaralha e seleciona 3 perguntas aleatórias
+        selectedQuestions = allQuestions
+            .OrderBy(x => Guid.NewGuid())
+            .Take(3)
+            .ToList();
 
-            DisplayQuestions();
-        }
-        catch (Exception ex)
-        {
-            await DisplayAlert("Erro", "Falha ao carregar perguntas: " + ex.Message, "OK");
-        }
+        DisplayQuestions();
     }
 
     private void DisplayQuestions()
     {
         QuestionsStackLayout.Children.Clear();
-        int index = 1;
+        int questionIndex = 1;
 
         foreach (var question in selectedQuestions)
         {
-            QuestionsStackLayout.Children.Add(new Label
+            // Frame para cada pergunta (estilo verde/azulado)
+            var questionFrame = new Frame
             {
-                Text = $"{index}. {question.Text}",
-                FontSize = 16,
-                TextColor = Colors.Black,
-                Margin = new Thickness(0, 10)
+                BackgroundColor = Color.FromArgb("#2C5F6F"),
+                CornerRadius = 15,
+                Padding = 15,
+                Margin = new Thickness(0, 10),
+                HasShadow = true
+            };
+
+            var questionLayout = new VerticalStackLayout { Spacing = 8 };
+
+            // Título da pergunta
+            questionLayout.Children.Add(new Label
+            {
+                Text = $"{questionIndex}. {question.Text}",
+                FontSize = 14,
+                FontAttributes = FontAttributes.Bold,
+                TextColor = Colors.White,
+                Margin = new Thickness(0, 0, 0, 10)
             });
 
-            // Converte Dictionary para lista de opções
-            var optionsList = question.Options.Values.ToList();
-
-            foreach (var option in optionsList)
+            // Opções de resposta
+            if (question.Options != null && question.Options.Count > 0)
             {
-                var horizontalLayout = new HorizontalStackLayout { Spacing = 10 };
+                string groupName = $"question_{question.Id}";
 
-                var radioButton = new RadioButton
+                foreach (var optionPair in question.Options.OrderBy(o => o.Key))
                 {
-                    Value = option,
-                    GroupName = $"question{index}"
-                };
+                    var optionLayout = new HorizontalStackLayout
+                    {
+                        Spacing = 10,
+                        Margin = new Thickness(5, 3)
+                    };
 
-                horizontalLayout.Children.Add(radioButton);
-                horizontalLayout.Children.Add(new Label { Text = option, VerticalOptions = LayoutOptions.Center });
+                    var radioButton = new RadioButton
+                    {
+                        Value = optionPair.Key,
+                        GroupName = groupName,
+                        BackgroundColor = Colors.Transparent
+                    };
 
-                QuestionsStackLayout.Children.Add(horizontalLayout);
+                    // Captura o ID da questão para salvar resposta
+                    string currentQuestionId = question.Id;
+                    radioButton.CheckedChanged += (s, e) =>
+                    {
+                        if (e.Value)
+                        {
+                            userAnswers[currentQuestionId] = optionPair.Key;
+                        }
+                    };
+
+                    var optionLabel = new Label
+                    {
+                        Text = optionPair.Value,
+                        TextColor = Colors.White,
+                        FontSize = 13,
+                        VerticalOptions = LayoutOptions.Center
+                    };
+
+                    optionLayout.Children.Add(radioButton);
+                    optionLayout.Children.Add(optionLabel);
+
+                    questionLayout.Children.Add(optionLayout);
+                }
             }
 
-            index++;
+            questionFrame.Content = questionLayout;
+            QuestionsStackLayout.Children.Add(questionFrame);
+
+            questionIndex++;
         }
     }
 
-    private void OnFinishClicked(object sender, EventArgs e)
+    private async void OnFinishClicked(object sender, EventArgs e)
     {
-        DisplayAlert("Questionário", "Você finalizou o questionário!", "OK");
+        // Verifica se todas as perguntas foram respondidas
+        if (userAnswers.Count < selectedQuestions.Count)
+        {
+            await DisplayAlert("Atenção",
+                "Por favor, responda todas as perguntas antes de finalizar.",
+                "OK");
+            return;
+        }
+
+        // Calcula resultado ou exibe respostas
+        string resultado = CalcularResultado();
+
+        await DisplayAlert("Questionário Finalizado!", resultado, "OK");
+
+        // Navegar para outra tela ou voltar
+        // await Navigation.PopAsync();
+    }
+
+    private string CalcularResultado()
+    {
+        int pontuacao = 0;
+
+        foreach (var resposta in userAnswers)
+        {
+            // Converte a opção escolhida para pontuação
+            if (int.TryParse(resposta.Value, out int opcao))
+            {
+                pontuacao += opcao;
+            }
+        }
+
+        return $"Suas respostas:\n" +
+               $"Total de perguntas respondidas: {userAnswers.Count}\n" +
+               $"Pontuação total: {pontuacao}\n\n" +
+               string.Join("\n", userAnswers.Select(kvp =>
+                   $"{kvp.Key}: Opção {kvp.Value}"));
     }
 }
 
 public class Question
 {
-    [JsonProperty("question")]
+    public string Id { get; set; }
     public string Text { get; set; }
-
-    [JsonProperty("type")]
     public string Type { get; set; }
-
-    [JsonProperty("options")]
     public Dictionary<string, string> Options { get; set; }
 }

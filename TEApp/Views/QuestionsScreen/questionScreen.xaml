@@ -2,19 +2,81 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TEApp.Views.QuestionsScreen.QuestionScreen"
-             Title="Quociente de Espectro do Autismo"
+             Title="Quociente de Espectro do Autismo (QA)"
              BackgroundColor="White">
 
-    <ScrollView>
-        <VerticalStackLayout x:Name="QuestionsStackLayout"
-                             Padding="20"
-                             Spacing="15">
+    <Grid RowDefinitions="Auto,*,Auto" 
+          Padding="0">
 
-            <Button Text="Finalizar"
-                    BackgroundColor="#8b5cf6"
+        <!-- Header com botão voltar -->
+        <Grid Grid.Row="0"
+              BackgroundColor="White"
+              Padding="20,10"
+              ColumnDefinitions="Auto,*">
+
+            <Button Grid.Column="0"
+                    Text="&#x2190;"
+                    FontSize="24"
+                    TextColor="#2C5F6F"
+                    BackgroundColor="Transparent"
+                    WidthRequest="40"
+                    HeightRequest="40"
+                    HorizontalOptions="Start"/>
+
+            <Label Grid.Column="1"
+                   Text="Quociente de Espectro do Autismo (QA)"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="#2C5F6F"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Start"
+                   Margin="10,0,0,0"/>
+        </Grid>
+
+        <!-- Área de Scroll com as perguntas -->
+        <ScrollView Grid.Row="1"
+                    Padding="0">
+            <VerticalStackLayout Padding="20,10,20,20"
+                                 Spacing="15">
+
+                <!-- Instruções -->
+                <Frame BackgroundColor="#E3F2FD"
+                       BorderColor="#2C5F6F"
+                       CornerRadius="10"
+                       Padding="15"
+                       Margin="0,0,0,10"
+                       HasShadow="False">
+                    <Label Text="Responda de acordo com o quanto você concorda ou discorda com cada afirmação."
+                           FontSize="14"
+                           TextColor="#2C5F6F"
+                           HorizontalTextAlignment="Center"
+                           LineBreakMode="WordWrap"/>
+                </Frame>
+
+                <!-- As perguntas serão adicionadas aqui dinamicamente -->
+                <VerticalStackLayout x:Name="QuestionsStackLayout"
+                                     Spacing="15"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Botão Finalizar fixo no rodapé -->
+        <Frame Grid.Row="2"
+               BackgroundColor="White"
+               Padding="20,10,20,20"
+               HasShadow="True"
+               CornerRadius="0">
+            <Button x:Name="FinishButton"
+                    Text="Finalizar"
+                    BackgroundColor="#8B5CF6"
                     TextColor="White"
-                    CornerRadius="8"
-                    Clicked="OnFinishClicked"/>
-        </VerticalStackLayout>
-    </ScrollView>
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    Clicked="OnFinishClicked"
+                    HorizontalOptions="Fill"/>
+        </Frame>
+
+    </Grid>
 </ContentPage>
