@@ -33,6 +33,7 @@
                   Margin="40,5,0,5"/>
                 
                 <Entry
+                  x:Name="NomeEntry"
                   Visual="Default"
                   WidthRequest="250"
                   HeightRequest="20"
@@ -44,6 +45,7 @@
                   Margin="40,5,0,5"/>
 
                 <Entry
+                  x:Name="EmailEntry"
                   Visual="Default"
                   WidthRequest="250"
                   HeightRequest="20"
@@ -55,6 +57,7 @@
                   TextColor="Black"/>
 
                 <Entry
+                  x:Name="PasswordEntry"
                   Visual="Default"
                   WidthRequest="250"
                   HeightRequest="20"
@@ -64,13 +67,16 @@
                   Text="Confirme Sua Senha"
                   TextColor="Black"
                   Margin="40,5,0,5"/>
+                
                 <Entry
+                  x:Name="ConfirmPasswordEntry"
                   Visual="Default"
                   WidthRequest="250"
                   HeightRequest="20"
                   BackgroundColor="AliceBlue"/>
 
                 <Button
+                  x:Name="CadastrarButton"
                   Text="Cadastrar"
                   TextColor="Black"
                   WidthRequest="120"

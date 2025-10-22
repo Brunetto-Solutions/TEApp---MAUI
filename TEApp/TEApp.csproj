@@ -54,12 +54,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Views\StartTriageScreen\**" />
+	  <Compile Remove="Views\StartTriageScreen\**" />
+	  <EmbeddedResource Remove="Views\StartTriageScreen\**" />
+	  <MauiCss Remove="Views\StartTriageScreen\**" />
+	  <MauiXaml Remove="Views\StartTriageScreen\**" />
+	  <None Remove="Views\StartTriageScreen\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiImage Include="Resources\AppIcon\logo.png" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="FirebaseAuthentication.net" Version="4.1.0" />
+		<PackageReference Include="FirebaseDatabase.net" Version="5.0.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.5" />
 	</ItemGroup>
@@ -84,6 +94,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\InitialScreen\InitialScreen.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\QuestionsScreen\questionScreen.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Register\RegisterPage.xaml">

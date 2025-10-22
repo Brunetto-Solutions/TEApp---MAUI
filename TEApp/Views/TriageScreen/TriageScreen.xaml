@@ -80,6 +80,7 @@
                 CornerRadius="100"
                 WidthRequest="300"
                 HeightRequest="50"
+                Clicked="Button_Clicked"
             >
                 <Button.Shadow>
                     <Shadow Brush="Black" 

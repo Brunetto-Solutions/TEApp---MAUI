@@ -23,7 +23,7 @@ namespace TEApp
 
             builder.Services.AddSingleton(new FirebaseAuthClient(new FirebaseAuthConfig()
             {
-                ApiKey = "",
+                ApiKey = "AIzaSyC7Cu4XPtEV8YV9YJrAQP2-CQpPQxuEzDc",
                 AuthDomain = "teapp-120925.firebaseapp.com",
                 Providers = new FirebaseAuthProvider[]
                 {

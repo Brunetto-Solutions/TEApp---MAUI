@@ -57,7 +57,7 @@ namespace TEApp.Views.Login
 
         private async void registerRedirect(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Register.RegisterPage());
+            await Navigation.PushAsync(new Register.RegisterPage(_authClient));
         }
 
         private async void ForgotPasswordRedirect(object sender, EventArgs e)

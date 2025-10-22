@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TEApp.Views.Triage.StartTriagePage"
+             BackgroundColor="#FFFFFF"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto,*" Padding="20,60,20,20">
+
+        <!-- Logo e Ilustração -->
+        <VerticalStackLayout Grid.Row="0"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             Spacing="20">
+
+            <Image Source="logo.png"
+                   WidthRequest="200"
+                   HeightRequest="200"
+                   HorizontalOptions="Center"
+                   Opacity="0.2"/>
+
+            <Label Text="Quociente de Espectro do Autismo (QA)"
+                   FontAttributes="Bold"
+                   FontSize="24"
+                   HorizontalTextAlignment="Center"
+                   TextColor="#1E4D6B"/>
+
+            <Label Text="Essa escala foi desenvolvida para a detecção de quadros sutis de autismo em adultos"
+                   FontSize="16"
+                   HorizontalTextAlignment="Center"
+                   TextColor="#1E4D6B"/>
+
+            <Label Text="Leva cerca de 5-10 minutos para ser concluído"
+                   FontSize="14"
+                   HorizontalTextAlignment="Center"
+                   TextColor="#7B7B7B"/>
+        </VerticalStackLayout>
+
+        <!-- Botão Começar -->
+        <VerticalStackLayout Grid.Row="1"
+                             HorizontalOptions="Center"
+                             VerticalOptions="End"
+                             Margin="0,20,0,0">
+
+            <Button Text="Começar"
+                    WidthRequest="200"
+                    HeightRequest="50"
+                    BackgroundColor="#2A5C5E"
+                    TextColor="White"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    CornerRadius="25"
+                    Clicked="OnStartClicked">
+                <Button.Shadow>
+                    <Shadow Brush="Black" Opacity="0.3" Offset="0,4" Radius="8"/>
+                </Button.Shadow>
+            </Button>
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>
