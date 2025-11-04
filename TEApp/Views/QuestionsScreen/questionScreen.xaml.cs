@@ -188,13 +188,13 @@ public partial class QuestionScreen : ContentPage
             return;
         }
 
-        // Calcula resultado ou exibe respostas
+        // Calcula resultado
         string resultado = CalcularResultado();
 
         await DisplayAlert("Questionário Finalizado!", resultado, "OK");
 
-        // Navegar para outra tela ou voltar
-        // await Navigation.PopAsync();
+        // Navega para a HomePage
+        await Navigation.PushAsync(new HomePage());
     }
 
     private string CalcularResultado()

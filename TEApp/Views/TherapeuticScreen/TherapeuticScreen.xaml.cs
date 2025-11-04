@@ -6,4 +6,9 @@ public partial class TherapeuticScreen : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private async void GoHome(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new HomePage());
+    }
 }

@@ -83,6 +83,7 @@
             </Button>
             <Button 
                 Text="Pular Essa Etapa"
+                Clicked="GoHome"
                 BackgroundColor="#6C63FF"
                 TextColor="White"
                 FontFamily="Jaro"

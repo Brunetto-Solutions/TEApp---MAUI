@@ -3,9 +3,312 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TEApp.HomePage"
              Shell.NavBarIsVisible="False"
-             BackgroundColor="black">
+             BackgroundColor="#E8E5F2">
+
     <ScrollView>
-        <VerticalStackLayout>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Header -->
+            <Grid ColumnDefinitions="50,*,40,40" 
+                  ColumnSpacing="12"
+                  Margin="0,10,0,0">
+
+                <!-- Avatar -->
+                <Frame Grid.Column="0"
+                       WidthRequest="50" 
+                       HeightRequest="50"
+                       CornerRadius="25"
+                       Padding="0"
+                       HasShadow="False"
+                       BackgroundColor="#FFD700"
+                       IsClippedToBounds="True">
+                    <Label Text="😊" 
+                           FontSize="28"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                </Frame>
+
+                <!-- Nome -->
+                <Label Text="Nome Sobrenome" 
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                       VerticalOptions="Center"
+                       Grid.Column="1"/>
+
+                <!-- Ícone Link -->
+                <Frame Grid.Column="2"
+                       WidthRequest="40"
+                       HeightRequest="40"
+                       CornerRadius="20"
+                       Padding="0"
+                       HasShadow="False"
+                       BackgroundColor="White">
+                    <Label Text="🔗"
+                           FontSize="18"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnLinkClicked"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <!-- Ícone Notificação -->
+                <Frame Grid.Column="3"
+                       WidthRequest="40"
+                       HeightRequest="40"
+                       CornerRadius="20"
+                       Padding="0"
+                       HasShadow="False"
+                       BackgroundColor="#FFD700">
+                    <Label Text="🔔"
+                           FontSize="18"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnNotificationClicked"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </Grid>
+
+            <!-- Saudação -->
+            <Label Text="Olá, Nome!" 
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="#3D3466"
+                   Margin="0,10,0,0"/>
+
+            <!-- Ações rápidas -->
+            <Label Text="Ações rápidas"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   Margin="0,10,0,5"/>
+
+            <Grid ColumnDefinitions="*,*,*" 
+                  ColumnSpacing="10">
+
+                <!-- Pausas sensoriais -->
+                <Frame Grid.Column="0"
+                       BackgroundColor="White"
+                       CornerRadius="15"
+                       Padding="15,12"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                        <Label Text="🎧"
+                               FontSize="32"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Pausas sensoriais"
+                               FontSize="10"
+                               TextColor="#6B5B9D"
+                               HorizontalTextAlignment="Center"
+                               FontAttributes="Bold"
+                               MaxLines="2"
+                               LineBreakMode="WordWrap"/>
+                    </VerticalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnPausasSensoriaisClicked"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <!-- Rotina -->
+                <Frame Grid.Column="1"
+                       BackgroundColor="White"
+                       CornerRadius="15"
+                       Padding="15,12"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                        <Label Text="📅"
+                               FontSize="32"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Rotina"
+                               FontSize="10"
+                               TextColor="#6B5B9D"
+                               HorizontalTextAlignment="Center"
+                               FontAttributes="Bold"/>
+                    </VerticalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnRotinaClicked"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <!-- Diário emocional -->
+                <Frame Grid.Column="2"
+                       BackgroundColor="White"
+                       CornerRadius="15"
+                       Padding="15,12"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                        <Label Text="🧠"
+                               FontSize="32"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Diário emocional"
+                               FontSize="10"
+                               TextColor="#6B5B9D"
+                               HorizontalTextAlignment="Center"
+                               FontAttributes="Bold"
+                               MaxLines="2"
+                               LineBreakMode="WordWrap"/>
+                    </VerticalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnDiarioEmocionalClicked"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </Grid>
+
+            <!-- Próximo passo -->
+            <Frame BackgroundColor="White"
+                   CornerRadius="20"
+                   Padding="20"
+                   HasShadow="True"
+                   Margin="0,10,0,0">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Seu próximo passo:"
+                           FontSize="14"
+                           TextColor="Black"
+                           FontAttributes="Bold"/>
+
+                    <Grid ColumnDefinitions="50,*" ColumnSpacing="15">
+                        <Frame Grid.Column="0"
+                               BackgroundColor="#D4F4DD"
+                               CornerRadius="12"
+                               Padding="0"
+                               HasShadow="False"
+                               WidthRequest="50"
+                               HeightRequest="50">
+                            <Label Text="🕐"
+                                   FontSize="26"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Frame>
+
+                        <VerticalStackLayout Grid.Column="1" 
+                                           Spacing="2"
+                                           VerticalOptions="Center">
+                            <Label Text="15:00"
+                                   FontSize="16"
+                                   TextColor="Black"
+                                   FontAttributes="Bold"/>
+                            <Label Text="Caminhada"
+                                   FontSize="14"
+                                   TextColor="#666"/>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <Button Text="Iniciar atividade"
+                            BackgroundColor="#8B5CF6"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="12"
+                            HeightRequest="45"
+                            Clicked="OnIniciarAtividadeClicked"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Recomendado para você -->
+            <Label Text="Recomendado para você!"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   Margin="0,10,0,5"/>
+
+            <Grid ColumnDefinitions="*,*,*" 
+                  ColumnSpacing="10">
+
+                <!-- Gestão de hiperfoco -->
+                <Frame Grid.Column="0"
+                       BackgroundColor="White"
+                       CornerRadius="15"
+                       Padding="15,12"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                        <Label Text="🎯"
+                               FontSize="32"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Gestão de hiperfoco"
+                               FontSize="10"
+                               TextColor="#6B5B9D"
+                               HorizontalTextAlignment="Center"
+                               FontAttributes="Bold"
+                               MaxLines="2"
+                               LineBreakMode="WordWrap"/>
+                    </VerticalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnHiperfocoClicked"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <!-- Registro de comportamentos -->
+                <Frame Grid.Column="1"
+                       BackgroundColor="White"
+                       CornerRadius="15"
+                       Padding="15,12"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                        <Label Text="📋"
+                               FontSize="32"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Registro de comportamentos"
+                               FontSize="10"
+                               TextColor="#6B5B9D"
+                               HorizontalTextAlignment="Center"
+                               FontAttributes="Bold"
+                               MaxLines="2"
+                               LineBreakMode="WordWrap"/>
+                    </VerticalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnComportamentosClicked"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <!-- Conselho do dia -->
+                <Frame Grid.Column="2"
+                       BackgroundColor="White"
+                       CornerRadius="15"
+                       Padding="15,12"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                        <Label Text="💡"
+                               FontSize="32"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Conselho do dia"
+                               FontSize="10"
+                               TextColor="#6B5B9D"
+                               HorizontalTextAlignment="Center"
+                               FontAttributes="Bold"
+                               MaxLines="2"
+                               LineBreakMode="WordWrap"/>
+                    </VerticalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnConselhoDiaClicked"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </Grid>
+
+            <!-- Relatórios inteligentes -->
+            <Frame BackgroundColor="#D4F4DD"
+                   CornerRadius="15"
+                   Padding="20"
+                   HasShadow="True"
+                   Margin="0,10,0,20">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="15">
+                    <Label Text="📊"
+                           Grid.Column="0"
+                           FontSize="24"
+                           VerticalOptions="Center"/>
+                    <Label Text="Relatórios inteligentes"
+                           Grid.Column="1"
+                           FontSize="16"
+                           TextColor="#2D5F3F"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"/>
+                </Grid>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnRelatoriosClicked"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+
         </VerticalStackLayout>
     </ScrollView>
+
 </ContentPage>
