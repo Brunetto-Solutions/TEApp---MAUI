@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TEApp.Views.TimeForRest.NewPage1"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#E8E5F2"
+             Title="Pausas Sensoriais">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Header -->
+        <Grid Grid.Row="0" 
+              ColumnDefinitions="50,*,50"
+              Padding="20"
+              Margin="0,10,0,0">
+
+
+            <!-- Título -->
+        </Grid>
+
+        <!-- Conteúdo -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20" Spacing="20">
+
+                <!-- Descrição -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="15"
+                       Padding="20"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="🎧 Momentos de Calma"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="#3D3466"/>
+                        <Label Text="Escolha um tempo para sua pausa sensorial. Respire fundo, relaxe e cuide de você."
+                               FontSize="14"
+                               TextColor="#666"
+                               LineBreakMode="WordWrap"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Timer 5 minutos -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="20"
+                       Padding="25"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="15">
+                        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                            <Label Text="⏱️"
+                                   FontSize="32"/>
+                            <Label Text="5 Minutos"
+                                   FontSize="22"
+                                   FontAttributes="Bold"
+                                   TextColor="#3D3466"
+                                   VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+
+                        <!-- Display do Timer -->
+                        <Label x:Name="Timer5Label"
+                               Text="05:00"
+                               FontSize="48"
+                               FontAttributes="Bold"
+                               TextColor="#8B5CF6"
+                               HorizontalOptions="Center"
+                               Margin="0,10"/>
+
+                        <!-- Botões de Controle -->
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                            <Button x:Name="BtnIniciar5"
+                                    Grid.Column="0"
+                                    Text="Iniciar"
+                                    BackgroundColor="#8B5CF6"
+                                    TextColor="White"
+                                    FontAttributes="Bold"
+                                    CornerRadius="12"
+                                    HeightRequest="45"
+                                    Clicked="OnIniciar5Clicked"/>
+
+                            <Button x:Name="BtnParar5"
+                                    Grid.Column="1"
+                                    Text="Parar"
+                                    BackgroundColor="#FF6B6B"
+                                    TextColor="White"
+                                    FontAttributes="Bold"
+                                    CornerRadius="12"
+                                    HeightRequest="45"
+                                    IsEnabled="False"
+                                    Clicked="OnParar5Clicked"/>
+                        </Grid>
+
+                        <Button x:Name="BtnReiniciar5"
+                                Text="Reiniciar"
+                                BackgroundColor="#95A5A6"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                CornerRadius="12"
+                                HeightRequest="40"
+                                IsEnabled="False"
+                                Clicked="OnReiniciar5Clicked"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Timer 10 minutos -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="20"
+                       Padding="25"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="15">
+                        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                            <Label Text="⏱️"
+                                   FontSize="32"/>
+                            <Label Text="10 Minutos"
+                                   FontSize="22"
+                                   FontAttributes="Bold"
+                                   TextColor="#3D3466"
+                                   VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+
+                        <!-- Display do Timer -->
+                        <Label x:Name="Timer10Label"
+                               Text="10:00"
+                               FontSize="48"
+                               FontAttributes="Bold"
+                               TextColor="#10B981"
+                               HorizontalOptions="Center"
+                               Margin="0,10"/>
+
+                        <!-- Botões de Controle -->
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                            <Button x:Name="BtnIniciar10"
+                                    Grid.Column="0"
+                                    Text="Iniciar"
+                                    BackgroundColor="#10B981"
+                                    TextColor="White"
+                                    FontAttributes="Bold"
+                                    CornerRadius="12"
+                                    HeightRequest="45"
+                                    Clicked="OnIniciar10Clicked"/>
+
+                            <Button x:Name="BtnParar10"
+                                    Grid.Column="1"
+                                    Text="Parar"
+                                    BackgroundColor="#FF6B6B"
+                                    TextColor="White"
+                                    FontAttributes="Bold"
+                                    CornerRadius="12"
+                                    HeightRequest="45"
+                                    IsEnabled="False"
+                                    Clicked="OnParar10Clicked"/>
+                        </Grid>
+
+                        <Button x:Name="BtnReiniciar10"
+                                Text="Reiniciar"
+                                BackgroundColor="#95A5A6"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                CornerRadius="12"
+                                HeightRequest="40"
+                                IsEnabled="False"
+                                Clicked="OnReiniciar10Clicked"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Timer 15 minutos -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="20"
+                       Padding="25"
+                       HasShadow="True"
+                       Margin="0,0,0,20">
+                    <VerticalStackLayout Spacing="15">
+                        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                            <Label Text="⏱️"
+                                   FontSize="32"/>
+                            <Label Text="15 Minutos"
+                                   FontSize="22"
+                                   FontAttributes="Bold"
+                                   TextColor="#3D3466"
+                                   VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+
+                        <!-- Display do Timer -->
+                        <Label x:Name="Timer15Label"
+                               Text="15:00"
+                               FontSize="48"
+                               FontAttributes="Bold"
+                               TextColor="#F59E0B"
+                               HorizontalOptions="Center"
+                               Margin="0,10"/>
+
+                        <!-- Botões de Controle -->
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                            <Button x:Name="BtnIniciar15"
+                                    Grid.Column="0"
+                                    Text="Iniciar"
+                                    BackgroundColor="#F59E0B"
+                                    TextColor="White"
+                                    FontAttributes="Bold"
+                                    CornerRadius="12"
+                                    HeightRequest="45"
+                                    Clicked="OnIniciar15Clicked"/>
+
+                            <Button x:Name="BtnParar15"
+                                    Grid.Column="1"
+                                    Text="Parar"
+                                    BackgroundColor="#FF6B6B"
+                                    TextColor="White"
+                                    FontAttributes="Bold"
+                                    CornerRadius="12"
+                                    HeightRequest="45"
+                                    IsEnabled="False"
+                                    Clicked="OnParar15Clicked"/>
+                        </Grid>
+
+                        <Button x:Name="BtnReiniciar15"
+                                Text="Reiniciar"
+                                BackgroundColor="#95A5A6"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                CornerRadius="12"
+                                HeightRequest="40"
+                                IsEnabled="False"
+                                Clicked="OnReiniciar15Clicked"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>

@@ -84,6 +84,9 @@
 	  <Compile Update="Views\Login\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\TimeForRest\TimeForREst.xaml.cs">
+	    <DependentUpon>TimeForRest.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -103,6 +106,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\TherapeuticScreen\TherapeuticScreen.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\TimeForRest\TimeForRest.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\TriageScreen\TriageScreen.xaml">

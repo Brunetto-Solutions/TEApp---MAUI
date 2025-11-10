@@ -5,8 +5,6 @@
              BackgroundImageSource="background_screen.png"
              Shell.NavBarIsVisible="False"
              Title="RegisterPage">
-    <!-- Conteúdo aqui -->
-
     <Grid RowDefinitions="2*, auto, auto">
         <VerticalStackLayout Grid.Row="0" Padding="40">
             <VerticalStackLayout>
@@ -16,14 +14,11 @@
                   HorizontalOptions="Center"
                   VerticalOptions="Center"
                   FontSize="40"
-                  FontAttributes="Bold"
-                  />
-
+                  FontAttributes="Bold"/>
                 <Image
                   Source="logo.png"
                   Scale="1.2"
                   Opacity="1"/>
-
             </VerticalStackLayout>
 
             <VerticalStackLayout Grid.Row="0" Margin="0,-50">
@@ -31,14 +26,15 @@
                   Text="Nome Completo"
                   TextColor="Black"
                   Margin="40,5,0,5"/>
-                
+
                 <Entry
                   x:Name="NomeEntry"
+                  Placeholder="Digite seu nome completo"
                   Visual="Default"
                   WidthRequest="250"
                   HeightRequest="20"
                   BackgroundColor="AliceBlue"/>
-                
+
                 <Label
                   Text="Email"
                   TextColor="Black"
@@ -46,11 +42,13 @@
 
                 <Entry
                   x:Name="EmailEntry"
+                  Placeholder="exemplo@email.com"
+                  Keyboard="Email"
                   Visual="Default"
                   WidthRequest="250"
                   HeightRequest="20"
-                  BackgroundColor="AliceBlue"
-                  />
+                  BackgroundColor="AliceBlue"/>
+
                 <Label
                   Text="Senha"
                   Margin="40,5,0,5"
@@ -58,18 +56,22 @@
 
                 <Entry
                   x:Name="PasswordEntry"
+                  Placeholder="Mínimo 6 caracteres"
+                  IsPassword="True"
                   Visual="Default"
                   WidthRequest="250"
                   HeightRequest="20"
                   BackgroundColor="AliceBlue"/>
-                
+
                 <Label
                   Text="Confirme Sua Senha"
                   TextColor="Black"
                   Margin="40,5,0,5"/>
-                
+
                 <Entry
                   x:Name="ConfirmPasswordEntry"
+                  Placeholder="Digite a senha novamente"
+                  IsPassword="True"
                   Visual="Default"
                   WidthRequest="250"
                   HeightRequest="20"
@@ -78,7 +80,7 @@
                 <Button
                   x:Name="CadastrarButton"
                   Text="Cadastrar"
-                  TextColor="Black"
+                  TextColor="White"
                   WidthRequest="120"
                   Margin="0,20,0,0"
                   BackgroundColor="#2A5C5E"
@@ -94,7 +96,6 @@
                   BorderWidth="1"
                   BorderColor="black"
                   Clicked="loginRedirect"/>
-
             </VerticalStackLayout>
         </VerticalStackLayout>
     </Grid>

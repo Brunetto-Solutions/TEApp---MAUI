@@ -1,5 +1,6 @@
 using Firebase.Auth;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Storage;
 using TEApp.Views.Login;
 using TEApp.Views.InitialScreen;
 
@@ -22,7 +23,7 @@ namespace TEApp.Views.Register
 
         private async void OnRegisterClicked(object sender, EventArgs e)
         {
-            // Pegando os valores dos Entry pelo nome ou index
+            // Pegando os valores dos Entry pelo nome
             var nameEntry = this.FindByName<Entry>("NomeEntry");
             var emailEntry = this.FindByName<Entry>("EmailEntry");
             var passwordEntry = this.FindByName<Entry>("PasswordEntry");
@@ -33,10 +34,23 @@ namespace TEApp.Views.Register
             string password = passwordEntry?.Text;
             string confirmPassword = confirmEntry?.Text;
 
+            // Validações
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email) ||
                 string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(confirmPassword))
             {
                 await DisplayAlert("Erro", "Por favor, preencha todos os campos.", "OK");
+                return;
+            }
+
+            if (!IsValidEmail(email))
+            {
+                await DisplayAlert("Erro", "Por favor, insira um email válido.", "OK");
+                return;
+            }
+
+            if (password.Length < 6)
+            {
+                await DisplayAlert("Erro", "A senha deve ter no mínimo 6 caracteres.", "OK");
                 return;
             }
 
@@ -48,11 +62,18 @@ namespace TEApp.Views.Register
 
             try
             {
+                // Cria o usuário no Firebase
                 var userCredential = await _authClient.CreateUserWithEmailAndPasswordAsync(email, password);
 
                 if (userCredential.User != null)
                 {
-                    await DisplayAlert("Sucesso", "Cadastro realizado com sucesso!", "OK");
+                    // Salva os dados do usuário localmente
+                    SalvarDadosUsuario(name, email);
+
+                    // Extrai o primeiro nome para a mensagem
+                    string primeiroNome = name.Split(' ')[0];
+
+                    await DisplayAlert("Sucesso", $"Bem-vindo(a), {primeiroNome}! Cadastro realizado com sucesso!", "OK");
 
                     // Redireciona para tela inicial
                     await Navigation.PushAsync(new InitialScreen.InitialScreen());
@@ -60,12 +81,55 @@ namespace TEApp.Views.Register
             }
             catch (FirebaseAuthException ex)
             {
-                await DisplayAlert("Erro", $"Falha no cadastro: {ex.Reason}", "OK");
+                string mensagemErro = ObterMensagemErro(ex.Reason);
+                await DisplayAlert("Erro", mensagemErro, "OK");
             }
             catch (Exception ex)
             {
                 await DisplayAlert("Erro", $"Ocorreu um erro inesperado: {ex.Message}", "OK");
             }
+        }
+
+        private void SalvarDadosUsuario(string nomeCompleto, string email)
+        {
+            // Salva o nome completo
+            Preferences.Set("NomeCompleto", nomeCompleto);
+
+            // Extrai e salva o primeiro nome
+            string primeiroNome = nomeCompleto.Split(' ')[0];
+            Preferences.Set("PrimeiroNome", primeiroNome);
+
+            // Salva o email
+            Preferences.Set("Email", email);
+
+            // Marca que o usuário já está cadastrado
+            Preferences.Set("UsuarioCadastrado", true);
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private string ObterMensagemErro(AuthErrorReason reason)
+        {
+            return reason switch
+            {
+                AuthErrorReason.EmailExists => "Este email já está cadastrado.",
+                AuthErrorReason.WeakPassword => "Senha muito fraca. Use no mínimo 6 caracteres.",
+                AuthErrorReason.InvalidEmailAddress => "Email inválido.",
+                AuthErrorReason.MissingPassword => "Por favor, insira uma senha.",
+                AuthErrorReason.TooManyAttemptsTryLater => "Muitas tentativas. Tente novamente mais tarde.",
+                _ => $"Falha no cadastro: {reason}"
+            };
         }
 
         private async void loginRedirect(object sender, EventArgs e)
