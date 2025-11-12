@@ -8,31 +8,6 @@
     <Grid RowDefinitions="Auto,*,Auto" 
           Padding="0">
 
-        <!-- Header com botão voltar -->
-        <Grid Grid.Row="0"
-              BackgroundColor="White"
-              Padding="20,10"
-              ColumnDefinitions="Auto,*">
-
-            <Button Grid.Column="0"
-                    Text="&#x2190;"
-                    FontSize="24"
-                    TextColor="#2C5F6F"
-                    BackgroundColor="Transparent"
-                    WidthRequest="40"
-                    HeightRequest="40"
-                    HorizontalOptions="Start"/>
-
-            <Label Grid.Column="1"
-                   Text="Quociente de Espectro do Autismo (QA)"
-                   FontSize="18"
-                   FontAttributes="Bold"
-                   TextColor="#2C5F6F"
-                   VerticalOptions="Center"
-                   HorizontalOptions="Start"
-                   Margin="10,0,0,0"/>
-        </Grid>
-
         <!-- Área de Scroll com as perguntas -->
         <ScrollView Grid.Row="1"
                     Padding="0">

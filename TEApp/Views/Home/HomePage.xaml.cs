@@ -59,35 +59,22 @@ namespace TEApp
 
         private async void OnRotinaClicked(object sender, EventArgs e)
         {
-            await DisplayAlert("Rotina", "Navegando para rotina...", "OK");
-            // await Navigation.PushAsync(new Views.Rotina.RotinaPage());
+            await Navigation.PushAsync(new TEApp.Views.Routine.Routine());
         }
 
         private async void OnDiarioEmocionalClicked(object sender, EventArgs e)
         {
-            await DisplayAlert("Diário Emocional", "Navegando para diário emocional...", "OK");
-            // await Navigation.PushAsync(new Views.DiarioEmocional.DiarioEmocionalPage());
+            await Navigation.PushAsync(new TEApp.Views.Diary.Diary());
         }
 
         private async void OnIniciarAtividadeClicked(object sender, EventArgs e)
         {
-            bool resposta = await DisplayAlert(
-                "Iniciar Atividade",
-                $"{primeiroNome}, deseja iniciar a caminhada das 15:00?",
-                "Sim",
-                "Não"
-            );
-
-            if (resposta)
-            {
-                await DisplayAlert("Atividade Iniciada", "Boa caminhada! 🚶‍♂️", "OK");
-            }
+            await Navigation.PushAsync(new TEApp.Views.Walking.TimeForWorkout());
         }
 
         private async void OnHiperfocoClicked(object sender, EventArgs e)
         {
-            await DisplayAlert("Gestão de Hiperfoco", "Navegando para gestão de hiperfoco...", "OK");
-            // await Navigation.PushAsync(new Views.Hiperfoco.HiperfocoPage());
+            await Navigation.PushAsync(new TEApp.Views.Hiperfocus.Hiperfocus());
         }
 
         private async void OnComportamentosClicked(object sender, EventArgs e)
@@ -114,12 +101,6 @@ namespace TEApp
             string conselhoAleatorio = conselhos[random.Next(conselhos.Length)];
 
             await DisplayAlert("Conselho do Dia", conselhoAleatorio, "OK");
-        }
-
-        private async void OnRelatoriosClicked(object sender, EventArgs e)
-        {
-            await DisplayAlert("Relatórios Inteligentes", "Navegando para relatórios...", "OK");
-            // await Navigation.PushAsync(new Views.Relatorios.RelatoriosPage());
         }
     }
 }

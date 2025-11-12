@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TEApp.Views.Diary.Diary"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#E8E5F2">
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="20">
+
+        <!-- Header -->
+        <Grid Grid.Row="0" 
+              ColumnDefinitions="40,*,40"
+              Margin="0,10,0,20">
+
+            <!-- Botão Voltar -->
+            <Frame Grid.Column="0"
+                   WidthRequest="40"
+                   HeightRequest="40"
+                   CornerRadius="20"
+                   Padding="0"
+                   HasShadow="False"
+                   BackgroundColor="White">
+                <Label Text="←"
+                       FontSize="24"
+                       TextColor="#3D3466"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnBackClicked"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <!-- Título -->
+            <VerticalStackLayout Grid.Column="1"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Spacing="2">
+                <Label Text="Diário Emocional"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="#3D3466"
+                       HorizontalOptions="Center"/>
+                <Label x:Name="DateLabel"
+                       Text="Hoje, 11 de novembro"
+                       FontSize="12"
+                       TextColor="#666"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            <!-- Botão Histórico -->
+            <Frame Grid.Column="2"
+                   WidthRequest="40"
+                   HeightRequest="40"
+                   CornerRadius="20"
+                   Padding="0"
+                   HasShadow="False"
+                   BackgroundColor="White">
+                <Label Text="📖"
+                       FontSize="20"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnHistoryClicked"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+        </Grid>
+
+        <!-- Conteúdo Principal -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="20">
+
+                <!-- Como você está se sentindo? -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="20"
+                       Padding="20"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="Como você está se sentindo?"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="#3D3466"
+                               HorizontalTextAlignment="Center"/>
+
+                        <Grid ColumnDefinitions="*,*,*,*,*" 
+                              ColumnSpacing="8"
+                              RowSpacing="8">
+
+                            <!-- Muito Feliz -->
+                            <Frame x:Name="MoodVeryHappyFrame"
+                                   Grid.Column="0"
+                                   BackgroundColor="White"
+                                   BorderColor="#E0E0E0"
+                                   CornerRadius="15"
+                                   Padding="8"
+                                   HasShadow="False">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="😄"
+                                           FontSize="32"
+                                           HorizontalOptions="Center"/>
+                                    <Label Text="Ótimo"
+                                           FontSize="9"
+                                           TextColor="#666"
+                                           HorizontalTextAlignment="Center"/>
+                                </VerticalStackLayout>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnMoodVeryHappyClicked"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+
+                            <!-- Feliz -->
+                            <Frame x:Name="MoodHappyFrame"
+                                   Grid.Column="1"
+                                   BackgroundColor="White"
+                                   BorderColor="#E0E0E0"
+                                   CornerRadius="15"
+                                   Padding="8"
+                                   HasShadow="False">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="🙂"
+                                           FontSize="32"
+                                           HorizontalOptions="Center"/>
+                                    <Label Text="Bem"
+                                           FontSize="9"
+                                           TextColor="#666"
+                                           HorizontalTextAlignment="Center"/>
+                                </VerticalStackLayout>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnMoodHappyClicked"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+
+                            <!-- Neutro -->
+                            <Frame x:Name="MoodNeutralFrame"
+                                   Grid.Column="2"
+                                   BackgroundColor="White"
+                                   BorderColor="#E0E0E0"
+                                   CornerRadius="15"
+                                   Padding="8"
+                                   HasShadow="False">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="😐"
+                                           FontSize="32"
+                                           HorizontalOptions="Center"/>
+                                    <Label Text="Ok"
+                                           FontSize="9"
+                                           TextColor="#666"
+                                           HorizontalTextAlignment="Center"/>
+                                </VerticalStackLayout>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnMoodNeutralClicked"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+
+                            <!-- Triste -->
+                            <Frame x:Name="MoodSadFrame"
+                                   Grid.Column="3"
+                                   BackgroundColor="White"
+                                   BorderColor="#E0E0E0"
+                                   CornerRadius="15"
+                                   Padding="8"
+                                   HasShadow="False">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="😔"
+                                           FontSize="32"
+                                           HorizontalOptions="Center"/>
+                                    <Label Text="Triste"
+                                           FontSize="9"
+                                           TextColor="#666"
+                                           HorizontalTextAlignment="Center"/>
+                                </VerticalStackLayout>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnMoodSadClicked"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+
+                            <!-- Muito Triste -->
+                            <Frame x:Name="MoodVeryaSadFrame"
+                                   Grid.Column="4"
+                                   BackgroundColor="White"
+                                   BorderColor="#E0E0E0"
+                                   CornerRadius="15"
+                                   Padding="8"
+                                   HasShadow="False">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="😢"
+                                           FontSize="32"
+                                           HorizontalOptions="Center"/>
+                                    <Label Text="Mal"
+                                           FontSize="9"
+                                           TextColor="#666"
+                                           HorizontalTextAlignment="Center"/>
+                                </VerticalStackLayout>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnMoodVerySadClicked"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Emoções -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="20"
+                       Padding="20"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="O que você está sentindo?"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#3D3466"/>
+
+                        <FlexLayout x:Name="EmotionsContainer"
+                                   Wrap="Wrap"
+                                   JustifyContent="Start"
+                                   AlignItems="Start"
+                                   Direction="Row"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Nível de Energia -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="20"
+                       Padding="20"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Nível de energia"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="#3D3466"
+                                   VerticalOptions="Center"/>
+                            <Label x:Name="EnergyLabel"
+                                   Grid.Column="1"
+                                   Text="50%"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="#8B5CF6"
+                                   VerticalOptions="Center"/>
+                        </Grid>
+                        <Slider x:Name="EnergySlider"
+                               Minimum="0"
+                               Maximum="100"
+                               Value="50"
+                               MinimumTrackColor="#8B5CF6"
+                               MaximumTrackColor="#E0E0E0"
+                               ThumbColor="#8B5CF6"
+                               ValueChanged="OnEnergyChanged"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Nível de Ansiedade -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="20"
+                       Padding="20"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Nível de ansiedade"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="#3D3466"
+                                   VerticalOptions="Center"/>
+                            <Label x:Name="AnxietyLabel"
+                                   Grid.Column="1"
+                                   Text="25%"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="#FF9800"
+                                   VerticalOptions="Center"/>
+                        </Grid>
+                        <Slider x:Name="AnxietySlider"
+                               Minimum="0"
+                               Maximum="100"
+                               Value="25"
+                               MinimumTrackColor="#FF9800"
+                               MaximumTrackColor="#E0E0E0"
+                               ThumbColor="#FF9800"
+                               ValueChanged="OnAnxietyChanged"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- O que aconteceu hoje? -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="20"
+                       Padding="20"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="O que aconteceu hoje?"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#3D3466"/>
+                        <Editor x:Name="EventsEditor"
+                               Placeholder="Descreva os principais acontecimentos do seu dia..."
+                               PlaceholderColor="#999"
+                               TextColor="#3D3466"
+                               FontSize="14"
+                               HeightRequest="100"
+                               BackgroundColor="#F5F5F5"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Reflexões e Pensamentos -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="20"
+                       Padding="20"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Reflexões e pensamentos"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#3D3466"/>
+                        <Editor x:Name="ThoughtsEditor"
+                               Placeholder="Como você se sente sobre o que aconteceu? O que aprendeu?"
+                               PlaceholderColor="#999"
+                               TextColor="#3D3466"
+                               FontSize="14"
+                               HeightRequest="120"
+                               BackgroundColor="#F5F5F5"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Gratidão -->
+                <Frame BackgroundColor="#FFF9E6"
+                       CornerRadius="20"
+                       Padding="20"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="12">
+                        <Grid ColumnDefinitions="Auto,*">
+                            <Label Text="✨"
+                                   FontSize="20"
+                                   VerticalOptions="Center"
+                                   Margin="0,0,10,0"/>
+                            <Label Grid.Column="1"
+                                   Text="Pelo que você é grato hoje?"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="#3D3466"
+                                   VerticalOptions="Center"/>
+                        </Grid>
+                        <Editor x:Name="GratitudeEditor"
+                               Placeholder="Liste 3 coisas que te trouxeram alegria ou gratidão hoje..."
+                               PlaceholderColor="#999"
+                               TextColor="#3D3466"
+                               FontSize="14"
+                               HeightRequest="90"
+                               BackgroundColor="White"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Mensagem Motivacional -->
+                <Frame BackgroundColor="#D4F4DD"
+                       CornerRadius="15"
+                       Padding="15"
+                       HasShadow="False">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                        <Label Text="💚"
+                               Grid.Column="0"
+                               FontSize="20"
+                               VerticalOptions="Center"/>
+                        <Label x:Name="MotivationalLabel"
+                               Grid.Column="1"
+                               Text="Cada dia é uma nova oportunidade para crescer e se conhecer melhor!"
+                               FontSize="12"
+                               TextColor="#2D5F3F"
+                               LineBreakMode="WordWrap"
+                               VerticalOptions="Center"/>
+                    </Grid>
+                </Frame>
+
+                <BoxView HeightRequest="20" Color="Transparent"/>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Botão Salvar -->
+        <Button Grid.Row="2"
+                x:Name="SaveButton"
+                Text="💾 Salvar Registro"
+                BackgroundColor="#8B5CF6"
+                TextColor="White"
+                FontSize="16"
+                FontAttributes="Bold"
+                CornerRadius="15"
+                HeightRequest="55"
+                Margin="0,10,0,10"
+                Clicked="OnSaveClicked"/>
+    </Grid>
+
+</ContentPage>

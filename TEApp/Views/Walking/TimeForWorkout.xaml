@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TEApp.Views.Walking.TimeForWorkout"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#E8E5F2">
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="20">
+
+        <!-- Header -->
+        <Grid Grid.Row="0" 
+              ColumnDefinitions="40,*,40"
+              Margin="0,10,0,20">
+
+            <!-- Botão Voltar -->
+            <Frame Grid.Column="0"
+                   WidthRequest="40"
+                   HeightRequest="40"
+                   CornerRadius="20"
+                   Padding="0"
+                   HasShadow="False"
+                   BackgroundColor="White">
+                <Label Text="←"
+                       FontSize="24"
+                       TextColor="#3D3466"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnBackClicked"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <!-- Título -->
+            <Label Grid.Column="1"
+                   Text="Caminhada"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="#3D3466"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+
+            <!-- Botão Menu/Opções -->
+            <Frame Grid.Column="2"
+                   WidthRequest="40"
+                   HeightRequest="40"
+                   CornerRadius="20"
+                   Padding="0"
+                   HasShadow="False"
+                   BackgroundColor="White">
+                <Label Text="⋮"
+                       FontSize="24"
+                       TextColor="#3D3466"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+            </Frame>
+        </Grid>
+
+        <!-- Conteúdo Principal -->
+        <VerticalStackLayout Grid.Row="1" 
+                           Spacing="30"
+                           VerticalOptions="Center">
+
+            <!-- Card do Cronômetro -->
+            <Frame BackgroundColor="White"
+                   CornerRadius="30"
+                   Padding="40"
+                   HasShadow="True"
+                   HeightRequest="380">
+                <VerticalStackLayout Spacing="25" VerticalOptions="Center">
+
+                    <!-- Ícone da Atividade -->
+                    <Frame BackgroundColor="#F0EBFF"
+                           CornerRadius="40"
+                           Padding="0"
+                           HasShadow="False"
+                           WidthRequest="80"
+                           HeightRequest="80"
+                           HorizontalOptions="Center">
+                        <Label Text="🚶"
+                               FontSize="48"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+                    </Frame>
+
+                    <!-- Timer Display -->
+                    <Label x:Name="TimerLabel"
+                           Text="00:00"
+                           FontSize="64"
+                           FontAttributes="Bold"
+                           TextColor="#3D3466"
+                           HorizontalOptions="Center"
+                           FontFamily="Courier"/>
+
+                    <!-- Informações Adicionais -->
+                    <Grid ColumnDefinitions="*,*,*" 
+                          ColumnSpacing="10"
+                          Margin="0,10,0,0">
+
+                        <!-- Distância -->
+                        <VerticalStackLayout Grid.Column="0" 
+                                           Spacing="5"
+                                           HorizontalOptions="Center">
+                            <Label Text="📍"
+                                   FontSize="20"
+                                   HorizontalOptions="Center"/>
+                            <Label x:Name="DistanceLabel"
+                                   Text="0.0 km"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="#666"
+                                   HorizontalOptions="Center"/>
+                            <Label Text="Distância"
+                                   FontSize="10"
+                                   TextColor="#999"
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+
+                        <!-- Calorias -->
+                        <VerticalStackLayout Grid.Column="1" 
+                                           Spacing="5"
+                                           HorizontalOptions="Center">
+                            <Label Text="🔥"
+                                   FontSize="20"
+                                   HorizontalOptions="Center"/>
+                            <Label x:Name="CaloriesLabel"
+                                   Text="0 kcal"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="#666"
+                                   HorizontalOptions="Center"/>
+                            <Label Text="Calorias"
+                                   FontSize="10"
+                                   TextColor="#999"
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+
+                        <!-- Passos -->
+                        <VerticalStackLayout Grid.Column="2" 
+                                           Spacing="5"
+                                           HorizontalOptions="Center">
+                            <Label Text="👟"
+                                   FontSize="20"
+                                   HorizontalOptions="Center"/>
+                            <Label x:Name="StepsLabel"
+                                   Text="0"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="#666"
+                                   HorizontalOptions="Center"/>
+                            <Label Text="Passos"
+                                   FontSize="10"
+                                   TextColor="#999"
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Mensagem Motivacional -->
+            <Frame BackgroundColor="#D4F4DD"
+                   CornerRadius="15"
+                   Padding="20,15"
+                   HasShadow="False">
+                <Label x:Name="MotivationalLabel"
+                       Text="Você está indo muito bem! Continue assim! 💪"
+                       FontSize="14"
+                       TextColor="#2D5F3F"
+                       HorizontalTextAlignment="Center"
+                       LineBreakMode="WordWrap"/>
+            </Frame>
+        </VerticalStackLayout>
+
+        <!-- Botões de Controle -->
+        <Grid Grid.Row="2" 
+              ColumnDefinitions="*,*"
+              ColumnSpacing="15"
+              Margin="0,20,0,20">
+
+            <!-- Botão Pausar/Retomar -->
+            <Button x:Name="PauseButton"
+                    Grid.Column="0"
+                    Text="⏸ Pausar"
+                    BackgroundColor="#8B5CF6"
+                    TextColor="White"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    CornerRadius="15"
+                    HeightRequest="55"
+                    IsVisible="False"
+                    Clicked="OnPauseClicked"/>
+
+            <!-- Botão Iniciar -->
+            <Button x:Name="StartButton"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Text="▶ Iniciar"
+                    BackgroundColor="#8B5CF6"
+                    TextColor="White"
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    CornerRadius="15"
+                    HeightRequest="55"
+                    Clicked="OnStartClicked"/>
+
+            <!-- Botão Finalizar -->
+            <Button x:Name="StopButton"
+                    Grid.Column="1"
+                    Text="⏹ Finalizar"
+                    BackgroundColor="#FF6B6B"
+                    TextColor="White"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    CornerRadius="15"
+                    HeightRequest="55"
+                    IsVisible="False"
+                    Clicked="OnStopClicked"/>
+        </Grid>
+    </Grid>
+
+</ContentPage>

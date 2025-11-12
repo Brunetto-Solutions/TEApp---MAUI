@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TEApp.Views.Hiperfocus.Hiperfocus"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#E8E5F2">
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="20">
+
+        <!-- Header -->
+        <Grid Grid.Row="0" 
+              ColumnDefinitions="40,*,40"
+              Margin="0,10,0,20">
+
+            <!-- Botão Voltar -->
+            <Frame Grid.Column="0"
+                   WidthRequest="40"
+                   HeightRequest="40"
+                   CornerRadius="20"
+                   Padding="0"
+                   HasShadow="False"
+                   BackgroundColor="White">
+                <Label Text="←"
+                       FontSize="24"
+                       TextColor="#3D3466"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnBackClicked"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <!-- Título -->
+            <Label Grid.Column="1"
+                   Text="Gestão de Hiperfoco"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="#3D3466"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+
+            <!-- Botão Histórico -->
+            <Frame Grid.Column="2"
+                   WidthRequest="40"
+                   HeightRequest="40"
+                   CornerRadius="20"
+                   Padding="0"
+                   HasShadow="False"
+                   BackgroundColor="White">
+                <Label Text="📊"
+                       FontSize="20"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnHistoryClicked"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+        </Grid>
+
+        <!-- Conteúdo Principal -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="20">
+
+                <!-- Modo Selecionado -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="20"
+                       Padding="20"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="Escolha seu modo de foco"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="#3D3466"
+                               HorizontalTextAlignment="Center"/>
+
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                            <!-- Modo Pomodoro -->
+                            <Frame x:Name="PomodoroModeFrame"
+                                   Grid.Column="0"
+                                   BackgroundColor="#F3E8FF"
+                                   BorderColor="#8B5CF6"
+                                   CornerRadius="15"
+                                   Padding="12"
+                                   HasShadow="False">
+                                <VerticalStackLayout Spacing="5">
+                                    <Label Text="🍅"
+                                           FontSize="28"
+                                           HorizontalOptions="Center"/>
+                                    <Label Text="Pomodoro"
+                                           FontSize="11"
+                                           FontAttributes="Bold"
+                                           TextColor="#8B5CF6"
+                                           HorizontalTextAlignment="Center"/>
+                                    <Label Text="25 min"
+                                           FontSize="10"
+                                           TextColor="#666"
+                                           HorizontalTextAlignment="Center"/>
+                                </VerticalStackLayout>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnPomodoroModeClicked"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+
+                            <!-- Modo Curto -->
+                            <Frame x:Name="ShortModeFrame"
+                                   Grid.Column="1"
+                                   BackgroundColor="White"
+                                   BorderColor="#E0E0E0"
+                                   CornerRadius="15"
+                                   Padding="12"
+                                   HasShadow="False">
+                                <VerticalStackLayout Spacing="5">
+                                    <Label Text="⚡"
+                                           FontSize="28"
+                                           HorizontalOptions="Center"/>
+                                    <Label Text="Curto"
+                                           FontSize="11"
+                                           FontAttributes="Bold"
+                                           TextColor="#666"
+                                           HorizontalTextAlignment="Center"/>
+                                    <Label Text="15 min"
+                                           FontSize="10"
+                                           TextColor="#666"
+                                           HorizontalTextAlignment="Center"/>
+                                </VerticalStackLayout>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnShortModeClicked"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+
+                            <!-- Modo Longo -->
+                            <Frame x:Name="LongModeFrame"
+                                   Grid.Column="2"
+                                   BackgroundColor="White"
+                                   BorderColor="#E0E0E0"
+                                   CornerRadius="15"
+                                   Padding="12"
+                                   HasShadow="False">
+                                <VerticalStackLayout Spacing="5">
+                                    <Label Text="🎯"
+                                           FontSize="28"
+                                           HorizontalOptions="Center"/>
+                                    <Label Text="Longo"
+                                           FontSize="11"
+                                           FontAttributes="Bold"
+                                           TextColor="#666"
+                                           HorizontalTextAlignment="Center"/>
+                                    <Label Text="50 min"
+                                           FontSize="10"
+                                           TextColor="#666"
+                                           HorizontalTextAlignment="Center"/>
+                                </VerticalStackLayout>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnLongModeClicked"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Timer Principal -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="30"
+                       Padding="40"
+                       HasShadow="True"
+                       HeightRequest="350">
+                    <VerticalStackLayout Spacing="20" VerticalOptions="Center">
+
+                        <!-- Ícone de Status -->
+                        <Frame x:Name="StatusIconFrame"
+                               BackgroundColor="#F0EBFF"
+                               CornerRadius="50"
+                               Padding="0"
+                               HasShadow="False"
+                               WidthRequest="100"
+                               HeightRequest="100"
+                               HorizontalOptions="Center">
+                            <Label x:Name="StatusIconLabel"
+                                   Text="🎯"
+                                   FontSize="60"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Frame>
+
+                        <!-- Timer Display -->
+                        <Label x:Name="TimerLabel"
+                               Text="25:00"
+                               FontSize="72"
+                               FontAttributes="Bold"
+                               TextColor="#3D3466"
+                               HorizontalOptions="Center"
+                               FontFamily="Courier"/>
+
+                        <!-- Status e Sessão -->
+                        <VerticalStackLayout Spacing="8">
+                            <Label x:Name="StatusLabel"
+                                   Text="Pronto para começar"
+                                   FontSize="14"
+                                   TextColor="#666"
+                                   HorizontalTextAlignment="Center"/>
+                            <Label x:Name="SessionLabel"
+                                   Text="Sessão 1 de 4"
+                                   FontSize="12"
+                                   TextColor="#999"
+                                   HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Tarefa Atual -->
+                <Frame x:Name="TaskInputFrame"
+                       BackgroundColor="White"
+                       CornerRadius="20"
+                       Padding="20"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="No que você vai focar?"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#3D3466"/>
+                        <Entry x:Name="TaskEntry"
+                               Placeholder="Ex: Estudar matemática, escrever relatório..."
+                               PlaceholderColor="#999"
+                               TextColor="#3D3466"
+                               FontSize="14"
+                               BackgroundColor="#F5F5F5"
+                               HeightRequest="45"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Estatísticas Hoje -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="20"
+                       Padding="20"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="📈 Hoje"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#3D3466"/>
+
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+                            <!-- Sessões Completadas -->
+                            <Frame Grid.Column="0"
+                                   BackgroundColor="#F0F9FF"
+                                   CornerRadius="12"
+                                   Padding="15"
+                                   HasShadow="False">
+                                <VerticalStackLayout Spacing="5">
+                                    <Label Text="🎯"
+                                           FontSize="24"
+                                           HorizontalOptions="Center"/>
+                                    <Label x:Name="TodaySessionsLabel"
+                                           Text="0"
+                                           FontSize="24"
+                                           FontAttributes="Bold"
+                                           TextColor="#3D3466"
+                                           HorizontalOptions="Center"/>
+                                    <Label Text="Sessões"
+                                           FontSize="11"
+                                           TextColor="#666"
+                                           HorizontalOptions="Center"/>
+                                </VerticalStackLayout>
+                            </Frame>
+
+                            <!-- Tempo Focado -->
+                            <Frame Grid.Column="1"
+                                   BackgroundColor="#FFF4E6"
+                                   CornerRadius="12"
+                                   Padding="15"
+                                   HasShadow="False">
+                                <VerticalStackLayout Spacing="5">
+                                    <Label Text="⏱️"
+                                           FontSize="24"
+                                           HorizontalOptions="Center"/>
+                                    <Label x:Name="TodayTimeLabel"
+                                           Text="0 min"
+                                           FontSize="24"
+                                           FontAttributes="Bold"
+                                           TextColor="#3D3466"
+                                           HorizontalOptions="Center"/>
+                                    <Label Text="Focado"
+                                           FontSize="11"
+                                           TextColor="#666"
+                                           HorizontalOptions="Center"/>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Dicas -->
+                <Frame BackgroundColor="#D4F4DD"
+                       CornerRadius="15"
+                       Padding="15"
+                       HasShadow="False">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                        <Label Text="💡"
+                               Grid.Column="0"
+                               FontSize="20"
+                               VerticalOptions="Center"/>
+                        <Label x:Name="TipLabel"
+                               Grid.Column="1"
+                               Text="Desligue notificações e deixe água por perto durante a sessão de foco!"
+                               FontSize="12"
+                               TextColor="#2D5F3F"
+                               LineBreakMode="WordWrap"
+                               VerticalOptions="Center"/>
+                    </Grid>
+                </Frame>
+
+                <BoxView HeightRequest="20" Color="Transparent"/>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Botões de Controle -->
+        <Grid Grid.Row="2" 
+              ColumnDefinitions="*,*"
+              ColumnSpacing="15"
+              Margin="0,10,0,10">
+
+            <!-- Botão Iniciar -->
+            <Button x:Name="StartButton"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Text="▶ Iniciar Foco"
+                    BackgroundColor="#8B5CF6"
+                    TextColor="White"
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    CornerRadius="15"
+                    HeightRequest="55"
+                    Clicked="OnStartClicked"/>
+
+            <!-- Botão Pausar -->
+            <Button x:Name="PauseButton"
+                    Grid.Column="0"
+                    Text="⏸ Pausar"
+                    BackgroundColor="#FF9800"
+                    TextColor="White"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    CornerRadius="15"
+                    HeightRequest="55"
+                    IsVisible="False"
+                    Clicked="OnPauseClicked"/>
+
+            <!-- Botão Parar -->
+            <Button x:Name="StopButton"
+                    Grid.Column="1"
+                    Text="⏹ Parar"
+                    BackgroundColor="#FF6B6B"
+                    TextColor="White"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    CornerRadius="15"
+                    HeightRequest="55"
+                    IsVisible="False"
+                    Clicked="OnStopClicked"/>
+        </Grid>
+    </Grid>
+
+</ContentPage>  

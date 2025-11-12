@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TEApp.Views.Routine.Routine"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#E8E5F2">
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="20">
+
+        <!-- Header -->
+        <Grid Grid.Row="0" 
+              ColumnDefinitions="40,*,40"
+              Margin="0,10,0,20">
+
+            <!-- Botão Voltar -->
+            <Frame Grid.Column="0"
+                   WidthRequest="40"
+                   HeightRequest="40"
+                   CornerRadius="20"
+                   Padding="0"
+                   HasShadow="False"
+                   BackgroundColor="White">
+                <Label Text="←"
+                       FontSize="24"
+                       TextColor="#3D3466"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnBackClicked"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <!-- Título -->
+            <VerticalStackLayout Grid.Column="1"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Spacing="2">
+                <Label Text="Minha Rotina"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="#3D3466"
+                       HorizontalOptions="Center"/>
+                <Label x:Name="DateLabel"
+                       Text="Hoje, 11 de novembro"
+                       FontSize="12"
+                       TextColor="#666"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            <!-- Botão Calendário -->
+            <Frame Grid.Column="2"
+                   WidthRequest="40"
+                   HeightRequest="40"
+                   CornerRadius="20"
+                   Padding="0"
+                   HasShadow="False"
+                   BackgroundColor="White">
+                <Label Text="📅"
+                       FontSize="20"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnCalendarClicked"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+        </Grid>
+
+        <!-- Conteúdo Principal -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="20">
+
+                <!-- Estatísticas do Dia -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="20"
+                       Padding="20"
+                       HasShadow="True">
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+
+                        <!-- Total de Tarefas -->
+                        <VerticalStackLayout Grid.Column="0"
+                                           Spacing="5"
+                                           HorizontalOptions="Center">
+                            <Label x:Name="TotalTasksLabel"
+                                   Text="8"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   TextColor="#8B5CF6"
+                                   HorizontalOptions="Center"/>
+                            <Label Text="Total"
+                                   FontSize="11"
+                                   TextColor="#666"
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+
+                        <!-- Tarefas Concluídas -->
+                        <VerticalStackLayout Grid.Column="1"
+                                           Spacing="5"
+                                           HorizontalOptions="Center">
+                            <Label x:Name="CompletedTasksLabel"
+                                   Text="3"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   TextColor="#4CAF50"
+                                   HorizontalOptions="Center"/>
+                            <Label Text="Concluídas"
+                                   FontSize="11"
+                                   TextColor="#666"
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+
+                        <!-- Tarefas Pendentes -->
+                        <VerticalStackLayout Grid.Column="2"
+                                           Spacing="5"
+                                           HorizontalOptions="Center">
+                            <Label x:Name="PendingTasksLabel"
+                                   Text="5"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   TextColor="#FF9800"
+                                   HorizontalOptions="Center"/>
+                            <Label Text="Pendentes"
+                                   FontSize="11"
+                                   TextColor="#666"
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+
+                <!-- Barra de Progresso -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="15"
+                       Padding="20,15"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="8">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Progresso do dia"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="#3D3466"
+                                   VerticalOptions="Center"/>
+                            <Label x:Name="ProgressPercentLabel"
+                                   Grid.Column="1"
+                                   Text="38%"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="#8B5CF6"
+                                   VerticalOptions="Center"/>
+                        </Grid>
+                        <ProgressBar x:Name="ProgressBar"
+                                   Progress="0.38"
+                                   ProgressColor="#8B5CF6"
+                                   HeightRequest="8"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Seção: Manhã -->
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="🌅 Manhã (06:00 - 12:00)"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#3D3466"
+                           Margin="5,0,0,0"/>
+
+                    <StackLayout x:Name="MorningTasksContainer" Spacing="10"/>
+                </VerticalStackLayout>
+
+                <!-- Seção: Tarde -->
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="☀️ Tarde (12:00 - 18:00)"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#3D3466"
+                           Margin="5,0,0,0"/>
+
+                    <StackLayout x:Name="AfternoonTasksContainer" Spacing="10"/>
+                </VerticalStackLayout>
+
+                <!-- Seção: Noite -->
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="🌙 Noite (18:00 - 23:59)"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#3D3466"
+                           Margin="5,0,0,0"/>
+
+                    <StackLayout x:Name="NightTasksContainer" Spacing="10"/>
+                </VerticalStackLayout>
+
+                <!-- Espaçamento inferior -->
+                <BoxView HeightRequest="20" Color="Transparent"/>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Botão Adicionar Tarefa -->
+        <Button Grid.Row="2"
+                x:Name="AddTaskButton"
+                Text="+ Adicionar Tarefa"
+                BackgroundColor="#8B5CF6"
+                TextColor="White"
+                FontSize="16"
+                FontAttributes="Bold"
+                CornerRadius="15"
+                HeightRequest="55"
+                Margin="0,10,0,10"
+                Clicked="OnAddTaskClicked"/>
+    </Grid>
+
+</ContentPage>

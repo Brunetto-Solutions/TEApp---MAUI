@@ -284,30 +284,6 @@
                     </Frame.GestureRecognizers>
                 </Frame>
             </Grid>
-
-            <!-- Relatórios inteligentes -->
-            <Frame BackgroundColor="#D4F4DD"
-                   CornerRadius="15"
-                   Padding="20"
-                   HasShadow="True"
-                   Margin="0,10,0,20">
-                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="15">
-                    <Label Text="📊"
-                           Grid.Column="0"
-                           FontSize="24"
-                           VerticalOptions="Center"/>
-                    <Label Text="Relatórios inteligentes"
-                           Grid.Column="1"
-                           FontSize="16"
-                           TextColor="#2D5F3F"
-                           FontAttributes="Bold"
-                           VerticalOptions="Center"/>
-                </Grid>
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnRelatoriosClicked"/>
-                </Frame.GestureRecognizers>
-            </Frame>
-
         </VerticalStackLayout>
     </ScrollView>
 
