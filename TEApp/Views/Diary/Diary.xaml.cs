@@ -339,7 +339,8 @@ namespace TEApp.Views.Diary
                     return;
             }
 
-            await Navigation.PopAsync();
+            // Para Shell, use Shell.Current.GoToAsync com "..")
+            await Shell.Current.GoToAsync("..");
         }
     }
 }
