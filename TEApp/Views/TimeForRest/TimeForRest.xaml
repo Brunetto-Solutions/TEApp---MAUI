@@ -13,8 +13,6 @@
               ColumnDefinitions="50,*,50"
               Padding="20"
               Margin="0,10,0,0">
-
-
             <!-- Título -->
         </Grid>
 

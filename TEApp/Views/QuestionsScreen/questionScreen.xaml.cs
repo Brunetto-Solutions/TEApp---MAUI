@@ -90,7 +90,7 @@ public partial class QuestionScreen : ContentPage
         // Embaralha e seleciona 3 perguntas aleatórias
         selectedQuestions = allQuestions
             .OrderBy(x => Guid.NewGuid())
-            .Take(3)
+            .Take(5)
             .ToList();
 
         DisplayQuestions();
@@ -196,7 +196,7 @@ public partial class QuestionScreen : ContentPage
         // Navega para a HomePage
         await Navigation.PushAsync(new HomePage());
     }
-
+    ç
     private string CalcularResultado()
     {
         int pontuacao = 0;
