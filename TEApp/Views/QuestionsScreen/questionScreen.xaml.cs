@@ -196,7 +196,6 @@ public partial class QuestionScreen : ContentPage
         // Navega para a HomePage
         await Navigation.PushAsync(new HomePage());
     }
-    ç
     private string CalcularResultado()
     {
         int pontuacao = 0;

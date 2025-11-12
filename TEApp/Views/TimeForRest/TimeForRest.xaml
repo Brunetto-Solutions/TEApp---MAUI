@@ -13,7 +13,34 @@
               ColumnDefinitions="50,*,50"
               Padding="20"
               Margin="0,10,0,0">
-            <!-- Título -->
+            <!-- Botão Voltar -->
+            <Frame Grid.Column="0"
+                   WidthRequest="40"
+                   HeightRequest="40"
+                   CornerRadius="20"
+                   Padding="0"
+                   HasShadow="False"
+                   BackgroundColor="White">
+                <Label Text="←"
+                       FontSize="24"
+                       TextColor="#3D3466"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnBackClicked"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <VerticalStackLayout Grid.Column="1"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Spacing="2">
+                <Label Text="Pausas Sensorias"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="#3D3466"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
         </Grid>
 
         <!-- Conteúdo -->
@@ -220,10 +247,7 @@
                                 Clicked="OnReiniciar15Clicked"/>
                     </VerticalStackLayout>
                 </Frame>
-
             </VerticalStackLayout>
         </ScrollView>
-
     </Grid>
-
 </ContentPage>

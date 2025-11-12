@@ -29,7 +29,8 @@
                 </Frame>
 
                 <!-- Nome -->
-                <Label Text="Nome Sobrenome" 
+                <Label x:Name="LabelNomeCompleto"
+                       Text="Nome Sobrenome" 
                        FontSize="16"
                        FontAttributes="Bold"
                        TextColor="Black"
@@ -72,7 +73,8 @@
             </Grid>
 
             <!-- Saudação -->
-            <Label Text="Olá, Nome!" 
+            <Label x:Name="LabelSaudacao"
+                   Text="Olá, Nome!" 
                    FontSize="28"
                    FontAttributes="Bold"
                    TextColor="#3D3466"

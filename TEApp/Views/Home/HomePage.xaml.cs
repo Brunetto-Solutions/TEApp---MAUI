@@ -16,11 +16,9 @@ namespace TEApp
 
         private void CarregarDadosUsuario()
         {
-            // Recupera o nome completo das preferências
             nomeUsuario = Preferences.Get("NomeCompleto", "Nome Sobrenome");
             primeiroNome = Preferences.Get("PrimeiroNome", "Nome");
 
-            // Atualiza os Labels na interface
             var labelNomeCompleto = this.FindByName<Label>("LabelNomeCompleto");
             if (labelNomeCompleto != null)
             {
