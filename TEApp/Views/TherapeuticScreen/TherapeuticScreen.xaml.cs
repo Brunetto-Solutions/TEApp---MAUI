@@ -11,4 +11,9 @@ public partial class TherapeuticScreen : ContentPage
     {
         await Navigation.PushAsync(new HomePage());
     }
+
+    private async void PlanTherapeutic(object sender, EventArgs e)
+    {
+        await DisplayAlert("Link", "Função de compartilhamento em desenvolvimento", "OK");
+    }
 }

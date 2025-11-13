@@ -65,6 +65,7 @@
 
             <Button 
                 Text="Cadastrar Meu Plano"
+                Clicked="PlanTherapeutic"
                 BackgroundColor="#6C63FF"
                 TextColor="White"
                 FontFamily="Jaro"

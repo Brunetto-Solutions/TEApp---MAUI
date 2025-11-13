@@ -7,6 +7,7 @@ namespace TEApp
     {
         private string nomeUsuario;
         private string primeiroNome;
+        private string emailUsuario;
 
         public HomePage()
         {
@@ -16,9 +17,23 @@ namespace TEApp
 
         private void CarregarDadosUsuario()
         {
-            nomeUsuario = Preferences.Get("NomeCompleto", "Nome Sobrenome");
-            primeiroNome = Preferences.Get("PrimeiroNome", "Nome");
+            // IMPORTANTE: Pega o email do usuário logado
+            emailUsuario = Preferences.Get("EmailLogado", "");
 
+            if (string.IsNullOrEmpty(emailUsuario))
+            {
+                // Se não tem email logado, usa valores padrão
+                nomeUsuario = "Nome Sobrenome";
+                primeiroNome = "Nome";
+            }
+            else
+            {
+                // Carrega os dados ESPECÍFICOS deste usuário usando o email como chave
+                nomeUsuario = Preferences.Get($"{emailUsuario}_NomeCompleto", "Nome Sobrenome");
+                primeiroNome = Preferences.Get($"{emailUsuario}_PrimeiroNome", "Nome");
+            }
+
+            // Atualiza as labels
             var labelNomeCompleto = this.FindByName<Label>("LabelNomeCompleto");
             if (labelNomeCompleto != null)
             {
@@ -30,6 +45,10 @@ namespace TEApp
             {
                 labelSaudacao.Text = $"Olá, {primeiroNome}!";
             }
+
+            // Debug - remove depois de testar
+            System.Diagnostics.Debug.WriteLine($"📧 Email logado: {emailUsuario}");
+            System.Diagnostics.Debug.WriteLine($"👤 Nome: {nomeUsuario}");
         }
 
         protected override void OnAppearing()
@@ -51,7 +70,6 @@ namespace TEApp
 
         private async void OnPausasSensoriaisClicked(object sender, EventArgs e)
         {
-            // Navega para a tela de Pausas Sensoriais (Time For Rest)
             await Navigation.PushAsync(new Views.TimeForRest.NewPage1());
         }
 

@@ -1,4 +1,4 @@
-using Firebase.Auth;
+Ôªøusing Firebase.Auth;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
 using TEApp.Views.Login;
@@ -15,7 +15,7 @@ namespace TEApp.Views.Register
             InitializeComponent();
             _authClient = authClient;
 
-            // Associa o bot„o Cadastrar ‡ funÁ„o
+            // Associa o bot√£o Cadastrar √† fun√ß√£o
             var registerButton = this.FindByName<Button>("CadastrarButton");
             if (registerButton != null)
                 registerButton.Clicked += OnRegisterClicked;
@@ -30,11 +30,11 @@ namespace TEApp.Views.Register
             var confirmEntry = this.FindByName<Entry>("ConfirmPasswordEntry");
 
             string name = nameEntry?.Text?.Trim();
-            string email = emailEntry?.Text?.Trim();
+            string email = emailEntry?.Text?.Trim().ToLower(); // SEMPRE em min√∫sculo
             string password = passwordEntry?.Text;
             string confirmPassword = confirmEntry?.Text;
 
-            // ValidaÁıes
+            // Valida√ß√µes
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email) ||
                 string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(confirmPassword))
             {
@@ -44,34 +44,41 @@ namespace TEApp.Views.Register
 
             if (!IsValidEmail(email))
             {
-                await DisplayAlert("Erro", "Por favor, insira um email v·lido.", "OK");
+                await DisplayAlert("Erro", "Por favor, insira um email v√°lido.", "OK");
                 return;
             }
 
             if (password.Length < 6)
             {
-                await DisplayAlert("Erro", "A senha deve ter no mÌnimo 6 caracteres.", "OK");
+                await DisplayAlert("Erro", "A senha deve ter no m√≠nimo 6 caracteres.", "OK");
                 return;
             }
 
             if (password != confirmPassword)
             {
-                await DisplayAlert("Erro", "As senhas n„o coincidem.", "OK");
+                await DisplayAlert("Erro", "As senhas n√£o coincidem.", "OK");
                 return;
             }
 
             try
             {
-                // Cria o usu·rio no Firebase
+                // Cria o usu√°rio no Firebase
                 var userCredential = await _authClient.CreateUserWithEmailAndPasswordAsync(email, password);
 
                 if (userCredential.User != null)
                 {
-                    // Salva os dados do usu·rio localmente
+                    // ====== SALVA OS DADOS COM PREFIXO DO EMAIL ======
                     SalvarDadosUsuario(name, email);
 
                     // Extrai o primeiro nome para a mensagem
                     string primeiroNome = name.Split(' ')[0];
+
+                    // Debug - remove depois de testar
+                    System.Diagnostics.Debug.WriteLine($"‚úÖ Cadastro realizado:");
+                    System.Diagnostics.Debug.WriteLine($"   üìß Email: {email}");
+                    System.Diagnostics.Debug.WriteLine($"   üë§ Nome: {name}");
+                    System.Diagnostics.Debug.WriteLine($"   üëã Primeiro Nome: {primeiroNome}");
+                    System.Diagnostics.Debug.WriteLine($"   üîë Chave salva: {email}_NomeCompleto");
 
                     await DisplayAlert("Sucesso", $"Bem-vindo(a), {primeiroNome}! Cadastro realizado com sucesso!", "OK");
 
@@ -92,18 +99,27 @@ namespace TEApp.Views.Register
 
         private void SalvarDadosUsuario(string nomeCompleto, string email)
         {
-            // Salva o nome completo
-            Preferences.Set("NomeCompleto", nomeCompleto);
+            // ====== IMPORTANTE: SALVA COM PREFIXO DO EMAIL ======
 
-            // Extrai e salva o primeiro nome
+            // Define qual usu√°rio est√° logado
+            Preferences.Set("EmailLogado", email);
+
+            // Extrai o primeiro nome
             string primeiroNome = nomeCompleto.Split(' ')[0];
-            Preferences.Set("PrimeiroNome", primeiroNome);
 
-            // Salva o email
-            Preferences.Set("Email", email);
+            // Salva o nome completo COM PREFIXO do email
+            Preferences.Set($"{email}_NomeCompleto", nomeCompleto);
 
-            // Marca que o usu·rio j· est· cadastrado
-            Preferences.Set("UsuarioCadastrado", true);
+            // Salva o primeiro nome COM PREFIXO do email
+            Preferences.Set($"{email}_PrimeiroNome", primeiroNome);
+
+            // Marca que este usu√°rio espec√≠fico est√° cadastrado
+            Preferences.Set($"{email}_UsuarioCadastrado", true);
+
+            // Debug - mostra o que foi salvo
+            System.Diagnostics.Debug.WriteLine($"üíæ Dados salvos para {email}:");
+            System.Diagnostics.Debug.WriteLine($"   {email}_NomeCompleto = {nomeCompleto}");
+            System.Diagnostics.Debug.WriteLine($"   {email}_PrimeiroNome = {primeiroNome}");
         }
 
         private bool IsValidEmail(string email)
@@ -123,9 +139,9 @@ namespace TEApp.Views.Register
         {
             return reason switch
             {
-                AuthErrorReason.EmailExists => "Este email j· est· cadastrado.",
-                AuthErrorReason.WeakPassword => "Senha muito fraca. Use no mÌnimo 6 caracteres.",
-                AuthErrorReason.InvalidEmailAddress => "Email inv·lido.",
+                AuthErrorReason.EmailExists => "Este email j√° est√° cadastrado.",
+                AuthErrorReason.WeakPassword => "Senha muito fraca. Use no m√≠nimo 6 caracteres.",
+                AuthErrorReason.InvalidEmailAddress => "Email inv√°lido.",
                 AuthErrorReason.MissingPassword => "Por favor, insira uma senha.",
                 AuthErrorReason.TooManyAttemptsTryLater => "Muitas tentativas. Tente novamente mais tarde.",
                 _ => $"Falha no cadastro: {reason}"

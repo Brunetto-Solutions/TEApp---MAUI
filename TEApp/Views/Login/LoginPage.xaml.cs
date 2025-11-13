@@ -1,4 +1,4 @@
-using Firebase.Auth;
+﻿using Firebase.Auth;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
 
@@ -18,7 +18,7 @@ namespace TEApp.Views.Login
         {
             base.OnAppearing();
 
-            // Verifica se o usu�rio j� est� logado
+            // Verifica se o usuário já está logado
             await VerificarUsuarioLogado();
         }
 
@@ -26,29 +26,35 @@ namespace TEApp.Views.Login
         {
             try
             {
-                // Verifica se h� um usu�rio autenticado no Firebase
+                // Verifica se há um usuário autenticado no Firebase
                 var user = _authClient.User;
 
-                // Tamb�m verifica se h� dados salvos localmente
-                bool usuarioCadastrado = Preferences.Get("UsuarioCadastrado", false);
+                // Verifica se há email logado salvo localmente
+                string emailLogado = Preferences.Get("EmailLogado", "");
 
-                if (user != null && usuarioCadastrado)
+                if (user != null && !string.IsNullOrEmpty(emailLogado))
                 {
-                    // Usu�rio j� est� logado, vai direto para a HomePage
-                    await Navigation.PushAsync(new InitialScreen.InitialScreen());
+                    // Verifica se o usuário específico está cadastrado
+                    bool usuarioCadastrado = Preferences.Get($"{emailLogado}_UsuarioCadastrado", false);
+
+                    if (usuarioCadastrado)
+                    {
+                        // Usuário já está logado, vai direto para a HomePage
+                        await Navigation.PushAsync(new InitialScreen.InitialScreen());
+                    }
                 }
             }
             catch (Exception ex)
             {
                 // Se houver erro, continua na tela de login
-                System.Diagnostics.Debug.WriteLine($"Erro ao verificar usu�rio: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Erro ao verificar usuário: {ex.Message}");
             }
         }
 
         private async void OnLoginClicked(object sender, EventArgs e)
         {
-            // Obt�m o email e a senha digitados pelo usu�rio
-            string email = emailEntry.Text?.Trim();
+            // Obtém o email e a senha digitados pelo usuário
+            string email = emailEntry.Text?.Trim().ToLower(); // SEMPRE em minúsculo
             string password = passwordEntry.Text;
 
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
@@ -59,33 +65,66 @@ namespace TEApp.Views.Login
 
             if (!IsValidEmail(email))
             {
-                await DisplayAlert("Erro", "Por favor, insira um email v�lido.", "OK");
+                await DisplayAlert("Erro", "Por favor, insira um email válido.", "OK");
                 return;
             }
 
             try
             {
-                // Tenta autenticar o usu�rio com o Firebase
+                // Tenta autenticar o usuário com o Firebase
                 var userCredential = await _authClient.SignInWithEmailAndPasswordAsync(email, password);
 
                 // Se o login for bem-sucedido
                 if (userCredential.User != null)
                 {
-                    // Salva o email do usu�rio
-                    Preferences.Set("Email", email);
-                    Preferences.Set("UsuarioCadastrado", true);
+                    // ====== IMPORTANTE: SALVA COM PREFIXO DO EMAIL ======
 
-                    // Se n�o tiver nome salvo, tenta buscar do Firebase ou usa o email
-                    string nomeCompleto = Preferences.Get("NomeCompleto", "");
+                    // Define qual usuário está logado
+                    Preferences.Set("EmailLogado", email);
+
+                    // PRIORIDADE 1: Tenta buscar o nome que foi salvo no CADASTRO
+                    string nomeCompleto = Preferences.Get($"{email}_NomeCompleto", "");
+                    string primeiroNome = Preferences.Get($"{email}_PrimeiroNome", "");
+
+                    // PRIORIDADE 2: Se não encontrou localmente, busca do Firebase
                     if (string.IsNullOrWhiteSpace(nomeCompleto))
                     {
-                        // Usa o nome do email como fallback
-                        string nomeFallback = email.Split('@')[0];
-                        Preferences.Set("NomeCompleto", nomeFallback);
-                        Preferences.Set("PrimeiroNome", nomeFallback);
+                        string displayName = userCredential.User.Info?.DisplayName;
+
+                        if (!string.IsNullOrWhiteSpace(displayName))
+                        {
+                            nomeCompleto = displayName;
+                            primeiroNome = displayName.Split(' ')[0];
+
+                            // Salva localmente para próximas vezes
+                            Preferences.Set($"{email}_NomeCompleto", nomeCompleto);
+                            Preferences.Set($"{email}_PrimeiroNome", primeiroNome);
+                        }
+                        else
+                        {
+                            // ÚLTIMA OPÇÃO: Se não tem nada, usa email temporariamente
+                            // Isso só acontece se o cadastro falhou em salvar o nome
+                            string nomeFallback = email.Split('@')[0];
+                            nomeFallback = char.ToUpper(nomeFallback[0]) + nomeFallback.Substring(1);
+                            nomeCompleto = nomeFallback;
+                            primeiroNome = nomeFallback;
+
+                            System.Diagnostics.Debug.WriteLine($"⚠️ AVISO: Nome não encontrado para {email}");
+                            System.Diagnostics.Debug.WriteLine($"   Usando fallback: {nomeFallback}");
+                        }
                     }
 
-                    await DisplayAlert("Sucesso", "Login realizado com sucesso!", "OK");
+                    // Marca que este usuário está cadastrado
+                    Preferences.Set($"{email}_UsuarioCadastrado", true);
+
+                    // Debug - remove depois de testar
+                    System.Diagnostics.Debug.WriteLine($"✅ Login realizado:");
+                    System.Diagnostics.Debug.WriteLine($"   📧 Email: {email}");
+                    System.Diagnostics.Debug.WriteLine($"   👤 Nome Completo: {nomeCompleto}");
+                    System.Diagnostics.Debug.WriteLine($"   👋 Primeiro Nome: {primeiroNome}");
+                    System.Diagnostics.Debug.WriteLine($"   🔑 Chave usada: {email}_NomeCompleto");
+
+                    await DisplayAlert("Sucesso", $"Bem-vindo de volta, {primeiroNome}!", "OK");
 
                     // Navega para a tela inicial
                     await Navigation.PushAsync(new InitialScreen.InitialScreen());
@@ -123,9 +162,9 @@ namespace TEApp.Views.Login
         {
             return reason switch
             {
-                AuthErrorReason.InvalidEmailAddress => "Email inv�lido.",
+                AuthErrorReason.InvalidEmailAddress => "Email inválido.",
                 AuthErrorReason.WrongPassword => "Senha incorreta.",
-                AuthErrorReason.UserNotFound => "Usu�rio n�o encontrado.",
+                AuthErrorReason.UserNotFound => "Usuário não encontrado.",
                 AuthErrorReason.UserDisabled => "Esta conta foi desativada.",
                 AuthErrorReason.TooManyAttemptsTryLater => "Muitas tentativas. Tente novamente mais tarde.",
                 _ => "Credenciais incorretas. Verifique seu email e senha."
