@@ -37,20 +37,20 @@
                        VerticalOptions="Center"
                        Grid.Column="1"/>
 
-                <!-- Ícone Link -->
+                <!-- Botão Logout -->
                 <Frame Grid.Column="2"
                        WidthRequest="40"
                        HeightRequest="40"
                        CornerRadius="20"
                        Padding="0"
                        HasShadow="False"
-                       BackgroundColor="White">
-                    <Label Text="🔗"
+                       BackgroundColor="#FF6B6B">
+                    <Label Text="🚪"
                            FontSize="18"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"/>
                     <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnLinkClicked"/>
+                        <TapGestureRecognizer Tapped="OnLogoutClicked"/>
                     </Frame.GestureRecognizers>
                 </Frame>
 

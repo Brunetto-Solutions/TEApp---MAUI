@@ -58,9 +58,50 @@ namespace TEApp
             CarregarDadosUsuario();
         }
 
-        private async void OnLinkClicked(object sender, EventArgs e)
+        private async void OnLogoutClicked(object sender, EventArgs e)
         {
-            await DisplayAlert("Link", "Função de compartilhamento em desenvolvimento", "OK");
+            string action = await DisplayActionSheet(
+                "Sair da conta",
+                "Cancelar",
+                "Logout",
+                "Ver dados da conta atual"
+            );
+
+            if (action == "Logout")
+            {
+                bool confirmLogout = await DisplayAlert(
+                    "Confirmar Logout",
+                    $"Deseja realmente sair da conta de {primeiroNome}?",
+                    "Sim, sair",
+                    "Cancelar"
+                );
+
+                if (confirmLogout)
+                {
+                    try
+                    {
+                        // Remove o email logado (mantém os dados salvos)
+                        Preferences.Remove("EmailLogado");
+
+                        await DisplayAlert("Logout", "Você saiu da sua conta com sucesso!", "OK");
+
+                        // Volta para a tela de login
+                        await Navigation.PopToRootAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        await DisplayAlert("Erro", $"Erro ao fazer logout: {ex.Message}", "OK");
+                    }
+                }
+            }
+            else if (action == "Ver dados da conta atual")
+            {
+                await DisplayAlert(
+                    "Conta Atual",
+                    $"👤 Nome: {nomeUsuario}\n📧 Email: {emailUsuario}",
+                    "OK"
+                );
+            }
         }
 
         private async void OnNotificationClicked(object sender, EventArgs e)
