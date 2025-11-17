@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Storage;
 
 namespace TEApp.Views.Routine
 {
@@ -19,14 +21,57 @@ namespace TEApp.Views.Routine
     {
         private List<TaskItem> _tasks;
         private int _nextTaskId = 9;
+        private const string TASKS_KEY = "routine_tasks";
+        private const string NEXT_ID_KEY = "routine_next_id";
 
         public Routine()
         {
             InitializeComponent();
-            InitializeTasks();
+            LoadTasksFromStorage();
             LoadTasks();
             UpdateStatistics();
             UpdateDateLabel();
+        }
+
+        private void LoadTasksFromStorage()
+        {
+            try
+            {
+                // Carrega as tarefas salvas
+                string tasksJson = Preferences.Get(TASKS_KEY, string.Empty);
+
+                if (!string.IsNullOrEmpty(tasksJson))
+                {
+                    _tasks = JsonSerializer.Deserialize<List<TaskItem>>(tasksJson);
+                    _nextTaskId = Preferences.Get(NEXT_ID_KEY, 9);
+                }
+                else
+                {
+                    // Se não há dados salvos, inicializa com tarefas padrão
+                    InitializeTasks();
+                    SaveTasksToStorage();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Em caso de erro, inicializa com tarefas padrão
+                Console.WriteLine($"Erro ao carregar tarefas: {ex.Message}");
+                InitializeTasks();
+            }
+        }
+
+        private void SaveTasksToStorage()
+        {
+            try
+            {
+                string tasksJson = JsonSerializer.Serialize(_tasks);
+                Preferences.Set(TASKS_KEY, tasksJson);
+                Preferences.Set(NEXT_ID_KEY, _nextTaskId);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao salvar tarefas: {ex.Message}");
+            }
         }
 
         private void InitializeTasks()
@@ -34,9 +79,9 @@ namespace TEApp.Views.Routine
             _tasks = new List<TaskItem>
             {
                 // Manhã
-                new TaskItem { Id = 1, Title = "Tomar café da manhã", Time = "07:00", Period = "Manhã", IsCompleted = true, Icon = "🍳" },
-                new TaskItem { Id = 2, Title = "Tomar medicação", Time = "08:00", Period = "Manhã", IsCompleted = true, Icon = "💊" },
-                new TaskItem { Id = 3, Title = "Exercícios de respiração", Time = "09:30", Period = "Manhã", IsCompleted = true, Icon = "🧘" },
+                new TaskItem { Id = 1, Title = "Tomar café da manhã", Time = "07:00", Period = "Manhã", IsCompleted = false, Icon = "🍳" },
+                new TaskItem { Id = 2, Title = "Tomar medicação", Time = "08:00", Period = "Manhã", IsCompleted = false, Icon = "💊" },
+                new TaskItem { Id = 3, Title = "Exercícios de respiração", Time = "09:30", Period = "Manhã", IsCompleted = false, Icon = "🧘" },
                 
                 // Tarde
                 new TaskItem { Id = 4, Title = "Almoço", Time = "12:30", Period = "Tarde", IsCompleted = false, Icon = "🍽️" },
@@ -214,6 +259,8 @@ namespace TEApp.Views.Routine
             titleLabel.TextColor = task.IsCompleted ? Color.FromArgb("#666") : Color.FromArgb("#3D3466");
             titleLabel.TextDecorations = task.IsCompleted ? TextDecorations.Strikethrough : TextDecorations.None;
 
+            // Salva no storage
+            SaveTasksToStorage();
             UpdateStatistics();
 
             // Mensagem motivacional
@@ -241,6 +288,7 @@ namespace TEApp.Views.Routine
                 if (confirm)
                 {
                     _tasks.Remove(task);
+                    SaveTasksToStorage();
                     LoadTasks();
                     UpdateStatistics();
                 }
@@ -336,6 +384,7 @@ namespace TEApp.Views.Routine
             };
 
             _tasks.Add(newTask);
+            SaveTasksToStorage();
             LoadTasks();
             UpdateStatistics();
 
@@ -364,6 +413,7 @@ namespace TEApp.Views.Routine
                 task.Time = newTime;
 
             task.Title = newTitle;
+            SaveTasksToStorage();
             LoadTasks();
         }
 
@@ -375,6 +425,25 @@ namespace TEApp.Views.Routine
         private async void OnCalendarClicked(object sender, EventArgs e)
         {
             await DisplayAlert("Calendário", "Funcionalidade de calendário em breve!", "OK");
+        }
+
+        // Método opcional para resetar as tarefas para o padrão
+        private void ResetTasks()
+        {
+            InitializeTasks();
+            SaveTasksToStorage();
+            LoadTasks();
+            UpdateStatistics();
+        }
+
+        // Método opcional para limpar todos os dados
+        private void ClearAllData()
+        {
+            Preferences.Remove(TASKS_KEY);
+            Preferences.Remove(NEXT_ID_KEY);
+            _tasks.Clear();
+            LoadTasks();
+            UpdateStatistics();
         }
     }
 }
